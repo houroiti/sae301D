@@ -1,0 +1,16 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Back-office Coach</h1>
+
+    <p>Bienvenue {{ app.user.email }}</p>
+
+    <ul>
+        <li><a href="#">📅 Planning</a></li>
+        <li><a href="#">🚫 Indisponibilités</a></li>
+        <li><a href="#">🗺 Carte interactive</a></li>
+        <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+    </ul>
+{% endblock %}
+

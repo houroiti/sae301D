@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zenlya - Sélection du créneau{% endblock %}
+
+{% block body %}
+    <body class="page-reservation-creneau">
+
+    <!-- CONTAINER PRINCIPAL -->
+    <div class="container">
+
+        <!-- PROGRESS BAR (LEFT SIDE) -->
+        <div class="progress-bar">
+            <div class="step completed">
+                <img src="{{ asset('images/reservation.jpg') }}" alt="Illustration" class="side-image">
+            </div>
+
+            <div class="progress-bar-vertical">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Services</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Créneau</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Informations</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Confirmation</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="main-content">
+                <div class="card">
+                    <h2 class="title">Sélection du créneau</h2>
+                    <p class="subtitle">Choisissez le jour et l'horaire qui vous convient</p>
+
+                    <div class="info-banner">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-icon"></span>
+                                <span>Pas de réservation le jour même</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon"></span>
+                                <span>Réservation possible à partir de demain</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon"><i class="far fa-clock"></i></span>
+                                <span>Créneaux : 8h-12h / 14h-20h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon"></span>
+                                <span>Pause déjeuner : 12h-14h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <label class="section-title">Sélectionnez une date</label>
+                        <div class="date-selector-container">
+                            <div class="date-display" id="dateDisplay">1 / 12 / 2025</div>
+                            <div class="custom-calendar-popup" id="customCalendarPopup">
+                                <div class="calendar-header">
+                                    <button class="calendar-nav-btn" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                                    <div class="calendar-title" id="calendarTitle">Décembre 2025</div>
+                                    <button class="calendar-nav-btn" id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                                </div>
+                                <div class="calendar-body">
+                                    <div class="calendar-month-year"></div>
+                                    <div class="calendar-weekdays">
+                                        <span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span>Sam</span><span>Dim</span>
+                                    </div>
+                                    <div class="calendar-days-grid" id="calendarDaysGrid"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section" id="timeSection" style="display: none;">
+                        <label class="section-title" id="timeTitle">Créneaux disponibles</label>
+                        <div class="time-grid" id="timeGrid"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="summary-card">
+                    <h3 class="summary-title" id="dateTitle">DATE SÉLECTIONNÉE : Lundi 1er décembre</h3>
+
+                    <div class="summary-section">
+                        <div class="section-title">VOTRE SÉANCE :</div>
+                        <div class="session-details" id="sessionDetails"></div>
+                    </div>
+
+                    <div class="summary-section">
+                        <div class="section-title">CRÉNEAUX CONSEILLÉS :</div>
+                        <div class="recommended-slots">
+                            <div>✓ 8h00 - Idéal pour bien démarrer la journée</div>
+                            <div>✓ 17h00 - Parfait après le travail</div>
+                        </div>
+                    </div>
+
+                    <div class="total-summary">
+                        <div class="total-line">
+                            <div class="total-label">TOTAL :</div>
+                            <div class="total-amount" id="totalAmount">50€</div>
+                        </div>
+                    </div>
+
+                    <div class="navigation-buttons">
+                        <button class="btn-back" id="backButton">
+                            <i class="fas fa-chevron-left"></i> Retour
+                        </button>
+                        <button class="btn-next" id="nextButton" disabled data-url="{{ path('app_client') }}">
+                            Suivant <i class="fas fa-chevron-right"></i>
+                        </button>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ asset('js/creneau.js') }}"></script>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <h4>Me contacter</h4>
+                <p>06-06-06-06-06<br>Adresse mail : lyacoach@gmail.com</p>
+            </div>
+            <div>
+                <h4>Réseaux Sociaux</h4>
+                <p>YouTube : lyacoach<br>Instagram : @lyacoach</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 Lya · Coach Bien-être · Tous droits réservés<br>
+                Mentions légales · Politique de confidentialité
+            </p>
+            <div class="footer-logo">
+                <img src="{{ asset('images/logo2.svg') }}" alt="Zenlya">
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const backButton = document.getElementById('backButton');
+            if (backButton) {
+                backButton.addEventListener('click', () => {
+                    // Redirection vers la page de sélection des services
+                    window.location.href = "{{ path('app_reservation') }}";
+                });
+            }
+        });
+    </script>
+
+    </body>
+{% endblock %}

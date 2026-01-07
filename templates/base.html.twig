@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Zenlya{% endblock %}</title>
+
+    {# CSS principal compilé à partir de SCSS #}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+{# ================= HEADER COMMUN ================= #}
+<header class="header">
+    <div class="logo">
+        <img src="{{ asset('images/logo.svg') }}" alt="Zenlya">
+    </div>
+
+    <div class="header-right">
+        <nav class="nav">
+            <a href="{{ path('app_home') }}" class="{% if current_page is defined and current_page == 'home' %}active{% endif %}">Accueil</a>
+            <a href="{{ path('app_about') }}" class="{% if current_page is defined and current_page == 'about' %}active{% endif %}">À propos</a>
+            <a href="{{ path('app_services') }}" class="{% if current_page is defined and current_page == 'services' %}active{% endif %}">Services</a>
+            <a href="{{ path('app_actualites') }}" class="{% if current_page is defined and current_page == 'actualites' %}active{% endif %}">Actualités</a>
+            <a href="{{ path('app_reservation') }}" class="{% if current_page is defined and current_page == 'reservation' %}active{% endif %}">Réservation</a>
+
+        </nav>
+
+        <div class="accessibility">
+            ACCESSIBILITÉ ▾
+            <div class="accessibility-menu">
+                <button data-action="contrast">◐ CONTRASTE</button>
+                <button data-action="dark">🌙 MODE SOMBRE</button>
+                <button data-action="font">Tt POLICE</button>
+                <button data-action="size">T↕ TAILLE TEXTE</button>
+            </div>
+        </div>
+
+        {# BOUTON ADMIN #}
+        <a href="{{ path('app_login') }}" class="admin-button" aria-label="Espace administrateur">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </a>
+
+    </div>
+</header>
+{# =============================================== #}
+
+{% block body %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>

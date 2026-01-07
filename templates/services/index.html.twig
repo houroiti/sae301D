@@ -1,0 +1,546 @@
+{% extends 'base.html.twig' %}
+{% set current_page = 'services' %}
+{% block title %}Zenlya - Services{% endblock %}
+
+{% block body %}
+
+    <section class="services-banner">
+        <div class="services-banner-container">
+            <img src="{{ asset('images/banniere1.jpg') }}" alt="Mes Services">
+
+            <div class="services-banner-text">
+                <h1>Mes Services</h1>
+                <div class="services-banner-links">
+                    <a href="#yin-yoga">Yin Yoga</a>
+                    <a href="#pilates">Pilates</a>
+                    <a href="#fitness">Fitness</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= YIN YOGA ================= -->
+    <section class="yin-yoga-section" id="yin-yoga">
+        <div class="yin-yoga-container">
+
+            <div class="yin-yoga-header">
+                <h2>Yin Yoga</h2>
+                <p>L'art de la relaxation profonde</p>
+            </div>
+
+            <div class="yin-yoga-cards">
+
+                <!-- CARTE 1 -->
+                <div class="yin-card">
+                    <div class="yin-card-top">
+                        <div class="yin-card-image">
+                            <img src="{{ asset('images/yinyoga.jpeg') }}" alt="Yin Yoga Découverte">
+                        </div>
+
+                        <div class="yin-card-header">
+                            <h3>Séance découverte Yin Yoga</h3>
+                            <div class="yin-card-badges">
+                                <span class="badge">50€</span>
+                                <span class="badge">60 min</span>
+                                <span class="badge">Débutant à avancé</span>
+                            </div>
+                            <p class="yin-card-description">
+                                Une introduction douce au Yin Yoga, pratique méditative qui
+                                cible les tissus conjonctifs (fascias, ligaments, articulations).
+                                Les postures sont tenues 3 à 5 minutes dans un relâchement complet.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="yin-card-details">
+                        <div class="yin-detail-section">
+                            <h4>Bienfaits santé :</h4>
+                            <ul>
+                                <li>Réduction du stress et de l'anxiété</li>
+                                <li>Amélioration de la flexibilité articulaire</li>
+                                <li>Stimulation du système parasympathique</li>
+                                <li>Amélioration de la qualité du sommeil</li>
+                                <li>Libération des tensions émotionnelles</li>
+                            </ul>
+                        </div>
+
+                        <div class="yin-detail-section">
+                            <h4>Séquence type</h4>
+                            <ul>
+                                <li>Méditation guidée (5 min) - Centrage et respiration</li>
+                                <li>Posture du papillon (5 min) - Ouverture des hanches</li>
+                                <li>Dragon couché (5 min par côté)</li>
+                                <li>Chenille (5 min)</li>
+                                <li>Sphinx (5 min)</li>
+                                <li>Relaxation (7 min) - Intégration complète</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARTE 2 -->
+                <div class="yin-card">
+                    <div class="yin-card-top">
+                        <div class="yin-card-image">
+                            <img src="{{ asset('images/yogaflex.jpeg') }}" alt="Yin Yoga Flexibilité">
+                        </div>
+
+                        <div class="yin-card-header">
+                            <h3>Yin Yoga pour la flexibilité</h3>
+                            <div class="yin-card-badges">
+                                <span class="badge">60€</span>
+                                <span class="badge">75 min</span>
+                                <span class="badge">Intermédiaire</span>
+                            </div>
+                            <p class="yin-card-description">
+                                Séance intensive axée sur l'amélioration de l'amplitude articulaire et la libération des tensions profondes. Utilisation de supports pour un lâcher-prise complet.
+                        </div>
+                    </div>
+
+                    <div class="yin-card-details">
+                        <div class="yin-detail-section">
+                            <h4>Bienfaits santé :</h4>
+                            <ul>
+                                <li>Augmentation significative de la mobilité</li>
+                                <li>Prévention des blessures</li>
+                                <li>Amélioration de la circulation sanguine</li>
+                                <li>Réduction des raideurs matinales</li>
+                                <li>Meilleure posture au quotidien</li>
+                            </ul>
+                        </div>
+
+                        <div class="yin-detail-section">
+                            <h4>Séquence type</h4>
+                            <ul>
+                                <li>Méditation & respiration (5 min)</li>
+                                <li>Dragon couché profond (4 min/côté)</li>
+                                <li>Pigeon Yin (5 min/côté)</li>
+                                <li>Shoelace (4 min/côté)</li>
+                                <li>Saddle (5 min)</li>
+                                <li>Dragon volant (3 min/côté)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARTE 3 -->
+                <div class="yin-card">
+                    <div class="yin-card-top">
+                        <div class="yin-card-image">
+                            <img src="{{ asset('images/yinyogasommeil.jpeg') }}" alt="Yin Yoga Sommeil">
+                        </div>
+
+                        <div class="yin-card-header">
+                            <h3>Yin Yoga restaurateur du sommeil</h3>
+                            <div class="yin-card-badges">
+                                <span class="badge">75€</span>
+                                <span class="badge">90 min</span>
+                                <span class="badge">Tous niveaux</span>
+                            </div>
+                            <p class="yin-card-description">
+                                Séance du soir spécialement conçue pour préparer au sommeil profond. Lumière tamisée, musique douce et aromathérapie lavande.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="yin-card-details">
+                        <div class="yin-detail-section">
+                            <h4>Bienfaits santé :</h4>
+                            <ul>
+                                <li>Activation du système parasympathique</li>
+                                <li>Sommeil plus profond et réparateur</li>
+                                <li>Réduction de l'insomnie</li>
+                                <li>Équilibrage du système nerveux</li>
+                                <li>Relaxation profonde et durable</li>
+                            </ul>
+                        </div>
+
+                        <div class="yin-detail-section">
+                            <h4>Séquence type</h4>
+                            <ul>
+                                <li>Respiration 4-7-8 (5 min)</li>
+                                <li>Supported Child Pose (6 min)</li>
+                                <li>Supported Fish (7 min)</li>
+                                <li>Legs Up the Wall (10 min)</li>
+                                <li>Supported Reclining Twist (6 min/côté)</li>
+                                <li>Happy Baby (5 min)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PILATES ================= -->
+    <section class="pilates-section" id="pilates">
+        <div class="pilates-container">
+
+            <div class="pilates-header">
+                <h2>Pilates</h2>
+                <p>Renforcement Intelligent</p>
+            </div>
+
+            <div class="pilates-cards">
+
+                <!-- CARTE 1 -->
+                <div class="pilates-card">
+                    <div class="pilates-card-top">
+                        <div class="pilates-card-image">
+                            <img src="{{ asset('images/pilates1.jpeg') }}" alt="Pilates Fondamental">
+                        </div>
+
+                        <div class="pilates-card-header">
+                            <h3>Pilates Fondamental</h3>
+                            <div class="pilates-card-badges">
+                                <span class="badge">55€</span>
+                                <span class="badge">55 min</span>
+                                <span class="badge">Débutant</span>
+                            </div>
+                            <p class="pilates-card-description">
+                                Initiation aux principes de base du Pilates : centrage, contrôle,
+                                précision, fluidité, respiration. Travail au sol (Mat Pilates) avec
+                                accent sur le "core".
+                            </p>
+                            <p class="pilates-card-option">
+                                <strong>Option :</strong> +15€ pour ballon et cercle magique
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="pilates-card-details">
+                        <div class="pilates-detail-section">
+                            <h4>Bienfaits santé :</h4>
+                            <ul>
+                                <li>Renforcement profond de la sangle abdominale</li>
+                                <li>Amélioration de la posture</li>
+                                <li>Prévention des douleurs lombaires</li>
+                                <li>Meilleure conscience corporelle</li>
+                                <li>Augmentation de la force fonctionnelle</li>
+                            </ul>
+                        </div>
+
+                        <div class="pilates-detail-section">
+                            <h4>Séquence type</h4>
+                            <ul>
+                                <li>Respiration diaphragmatique & Pelvic Curl (5 min)</li>
+                                <li>The Hundred (3x30sec)</li>
+                                <li>Roll Up (3 séries de 8)</li>
+                                <li>Single Leg Circles (2 min/jambe)</li>
+                                <li>Spine Stretch Forward (3x1 min)</li>
+                                <li>Swan Prep (3 séries de 10)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARTE 2 -->
+                <div class="pilates-card">
+                    <div class="pilates-card-top">
+                        <div class="pilates-card-image">
+                            <img src="{{ asset('images/Pilates_equipement.jpeg') }}" alt="Pilates Avancé avec équipement">
+                        </div>
+
+                        <div class="pilates-card-header">
+                            <h3>Pilates Avancé avec équipement</h3>
+                            <div class="pilates-card-badges">
+                                <span class="badge">70€</span>
+                                <span class="badge">70 min</span>
+                                <span class="badge">Inter/Avancé</span>
+                            </div>
+                            <p class="pilates-card-description">
+                                Séance intensive utilisant les machines Pilates professionnelles
+                                (Reformer, Cadillac, Chaise Wunda) pour un travail en résistance
+                                progressive et un alignement parfait.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="pilates-card-details">
+                        <div class="pilates-detail-section">
+                            <h4>Bienfaits santé :</h4>
+                            <ul>
+                                <li>Tonification musculaire sans volume</li>
+                                <li>Correction des déséquilibres posturaux</li>
+                                <li>Amélioration de la coordination</li>
+                                <li>Rééducation après blessure</li>
+                                <li>Préparation à d'autres sports</li>
+                            </ul>
+                        </div>
+
+                        <div class="pilates-detail-section">
+                            <h4>Séquence type</h4>
+                            <ul>
+                                <li>Footwork Series (5 min)</li>
+                                <li>Abdominal Series (8 min)</li>
+                                <li>Hip Work (6 min)</li>
+                                <li>Stretches (7 min)</li>
+                                <li>Full Body Integration (8 min)</li>
+                                <li>Arm Work (6 min)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARTE 3 : PILATES PRÉNATAL -->
+                <div class="pilates-card">
+                    <div class="pilates-card-top">
+                        <div class="pilates-card-image">
+                            <img src="{{ asset('images/Pilates_penatral.jpeg') }}" alt="Pilates Prénatal">
+                        </div>
+
+                        <div class="pilates-card-header">
+                            <h3>Pilates Prénatal</h3>
+                            <div class="pilates-card-badges">
+                                <span class="badge">65€</span>
+                                <span class="badge">60 min</span>
+                                <span class="badge">Grossesse (2ème trim.)</span>
+                            </div>
+                            <p class="pilates-card-description">
+                                Séance spécialement adaptée aux besoins de la femme enceinte :
+                                renforcement du plancher pelvien, soulagement des douleurs
+                                lombaires, préparation à l'accouchement.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="pilates-card-details">
+                        <div class="pilates-detail-section">
+                            <h4>Bienfaits santé :</h4>
+                            <ul>
+                                <li>Réduction des douleurs de grossesse</li>
+                                <li>Renforcement du périnée</li>
+                                <li>Meilleure circulation sanguine</li>
+                                <li>Préparation physique à l'accouchement</li>
+                                <li>Récupération post-partum facilitée</li>
+                            </ul>
+                        </div>
+
+                        <div class="pilates-detail-section">
+                            <h4>Séquence type</h4>
+                            <ul>
+                                <li>Éveil corporel et respiration adaptée (5 min)</li>
+                                <li>Pelvic Clock & tilts sur ballon (5 min)</li>
+                                <li>Cat-Cow modifié et mobilisation vertébrale (5 min)</li>
+                                <li>Side-Lying Series (leg lifts, clamshells) (10 min/côté)</li>
+                                <li>Exercices d'ouverture du bassin sur Birth Ball (10 min)</li>
+                                <li>Étirements doux et relaxation profonde (10 min)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= FITNESS ================= -->
+    <section class="fitness-section" id="fitness">
+        <div class="fitness-container">
+
+            <div class="fitness-header">
+                <h2>Fitness fonctionnel</h2>
+                <p>Énergie et vitalité</p>
+            </div>
+
+            <div class="fitness-cards">
+
+                <!-- CARTE 1 -->
+                <div class="fitness-card">
+                    <div class="fitness-card-top">
+                        <div class="fitness-card-image">
+                            <img src="{{ asset('images/fitness.jpeg') }}" alt="Full Body Circuit">
+                        </div>
+
+                        <div class="fitness-card-header">
+                            <h3>Full Body Circuit</h3>
+                            <div class="fitness-card-badges">
+                                <span class="badge">45€</span>
+                                <span class="badge">45 min</span>
+                                <span class="badge">Intermédiaire</span>
+                            </div>
+                            <p class="fitness-card-description">
+                                Circuit training complet alternant exercices de force, cardio et
+                                récupération active. Utilisation du poids du corps et de résistance
+                                élastique.
+                            </p>
+                            <p class="fitness-card-option">
+                                <strong>Option :</strong> +10€ pour haltères et kettlebells ajustables
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="fitness-card-details">
+                        <div class="fitness-detail-section">
+                            <h4>Bienfaits santé :</h4>
+                            <ul>
+                                <li>Brûlage calorique élevé (400-600 kcal/séance)</li>
+                                <li>Amélioration de l'endurance cardiovasculaire</li>
+                                <li>Renforcement musculaire global</li>
+                                <li>Augmentation du métabolisme basal</li>
+                                <li>Meilleure coordination</li>
+                            </ul>
+                        </div>
+
+                        <div class="fitness-detail-section">
+                            <h4>Séquence type</h4>
+                            <ul>
+                                <li>Squat sautés (45 sec) / Repos (15 sec)</li>
+                                <li>Push-ups modifiés (45 sec) / Repos (15 sec)</li>
+                                <li>Mountain Climbers (45 sec) / Repos (15 sec)</li>
+                                <li>Renegade Rows (45 sec) / Repos (15 sec)</li>
+                                <li>Burpees sans saut (45 sec) / Repos (15 sec)</li>
+                                <li>Plank avec rotations (45 sec) / Repos (15 sec)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARTE 2 -->
+                <div class="fitness-card">
+                    <div class="fitness-card-top">
+                        <div class="fitness-card-image">
+                            <img src="{{ asset('images/hiit.jpeg') }}" alt="HIIT">
+                        </div>
+
+                        <div class="fitness-card-header">
+                            <h3>HIIT (High Intensity Interval Training)</h3>
+                            <div class="fitness-card-badges">
+                                <span class="badge">40€</span>
+                                <span class="badge">30 min</span>
+                                <span class="badge">Avancé</span>
+                            </div>
+                            <p class="fitness-card-description">
+                                Entraînement par intervalles courts à intensité suivi de périodes
+                                de récupération active. Méthode Tabata modifiée (20 sec effort /
+                                10 sec repos x 8 rounds).
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="fitness-card-details">
+                        <div class="fitness-detail-section">
+                            <h4>Bienfaits santé :</h4>
+                            <ul>
+                                <li>Brûlage calorique jusqu'à +48h après (époc/afterburning)</li>
+                                <li>Amélioration significative de la VO2 max</li>
+                                <li>Gain de temps maximal</li>
+                                <li>Développement de la puissance musculaire</li>
+                                <li>Lutte contre la résistance à l'insuline</li>
+                            </ul>
+                        </div>
+
+                        <div class="fitness-detail-section">
+                            <h4>Séquence type</h4>
+                            <ul>
+                                <li>Squat jumps</li>
+                                <li>Push-ups explosifs</li>
+                                <li>Skater jumps</li>
+                                <li>Belly Jacks</li>
+                                <li>Tuck jumps</li>
+                                <li>Jumping jacks</li>
+                                <li>Tabata/séquence complète (4 min) puis répétition du circuit 1 à 2 fois.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARTE 3 -->
+                <div class="fitness-card">
+                    <div class="fitness-card-top">
+                        <div class="fitness-card-image">
+                            <img src="{{ asset('images/fitness_senior.jpeg') }}" alt="Fitness Doux Senior">
+                        </div>
+
+                        <div class="fitness-card-header">
+                            <h3>Fitness Doux Senior</h3>
+                            <div class="fitness-card-badges">
+                                <span class="badge">30€</span>
+                                <span class="badge">30 min</span>
+                                <span class="badge">60+ ans</span>
+                            </div>
+                            <p class="fitness-card-description">
+                                Programme spécialement pour maintenir musculature, l'équilibre et la
+                                force fonctionnelle. Accent sur la prévention des chutes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="fitness-card-details">
+                        <div class="fitness-detail-section">
+                            <h4>Bienfaits santé :</h4>
+                            <ul>
+                                <li>Réduction du risque de chutes de 30%</li>
+                                <li>Amélioration de l'autonomie</li>
+                                <li>Maintien de la masse musculaire</li>
+                                <li>Meilleure mobilité articulaire</li>
+                                <li>Prévention de l'ostéoporose</li>
+                            </ul>
+                        </div>
+
+                        <div class="fitness-detail-section">
+                            <h4>Séquence type</h4>
+                            <ul>
+                                <li>Échauffement articulaire en douceur (8 min)</li>
+                                <li>Exercices d'équilibre statique et dynamique (7 min)</li>
+                                <li>Renforcement léger avec chaises et bandes élastiques</li>
+                                <li>Étirements conscience et coordination (5 min)</li>
+                                <li>Étirements fonctionnels et relaxation (10 min)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="fitness-info-box">
+                <h3>Informations importantes</h3>
+                <div class="info-section">
+                    <strong>Contre-indications :</strong>
+                    <ul>
+                        <li>Yin Yoga déconseillé en cas d'hyperlaxité</li>
+                        <li>HIIT non recommandé pour problèmes cardiaques non contrôlés</li>
+                        <li>Consultation médicale requise pour Pilates prénatal</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <strong>Zone d'intervention :</strong>
+                    <ul>
+                        <li>Troyes intra-muros + banlieue jusqu'à 10km</li>
+                        <li>Frais de déplacement : gratuit dans Troyes, +5€ au-delà du périmètre</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <strong>Matériel fourni :</strong> Tapis, blocs, sangles, couvertures, élastiques, ballons, machines Pilates (sur demande)
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <h4>Me contacter</h4>
+                <p>06-06-06-06-06<br>lyacoach@gmail.com</p>
+            </div>
+
+            <div>
+                <h4>Réseaux sociaux</h4>
+                <p>YouTube : lyacoach<br>Instagram : @lyacoach</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 Lya · Coach Bien-être · Tous droits réservés</p>
+            <div class="footer-logo">
+                <img src="{{ asset('images/logo2.svg') }}" alt="Zenlya">
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}

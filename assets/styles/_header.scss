@@ -1,0 +1,258 @@
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 24px 80px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 20px;  
+}
+
+.logo img {
+  height: 80px;
+  display: block;
+}
+
+/* ===== NAVIGATION AVEC LIGNE ANIMÉE ===== */
+.nav {
+  margin-left: 80px;
+}
+
+.nav a {
+  position: relative;
+  margin: 0 18px;
+  text-decoration: none;
+  color: #3b2f28;
+  font-size: 14px;
+  padding-bottom: 8px;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+/* LIGNE ANIMÉE */
+.nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: #7a6a60;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* AU SURVOL : LA LIGNE S'ÉTEND */
+.nav a:hover::after {
+  width: 100%;
+}
+
+/* CHANGEMENT DE COULEUR AU SURVOL */
+.nav a:hover {
+  color: #7a6a60;
+}
+
+/* PAGE ACTIVE : LIGNE TOUJOURS VISIBLE */
+.nav a.active::after {
+  width: 100%;
+  background-color: #7a6a60;
+}
+
+.nav a.active {
+  color: #7a6a60;
+  font-weight: 500;
+}
+
+/* ===== ACCESSIBILITÉ ===== */
+.accessibility {
+  position: relative;
+  z-index: 20;
+  background-color: #6b5a4d;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.accessibility:hover {
+  background-color: #5a4a3f;
+  transform: translateY(-2px);
+}
+
+.accessibility.active {
+  background-color: #5a4a3f;
+}
+
+.accessibility-menu {
+  position: absolute;
+  top: 56px;
+  right: 0;
+  background-color: #7a6a60;
+  border-radius: 20px;
+  padding: 18px 22px;
+  width: 220px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.accessibility-menu button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  margin: 10px 0;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.accessibility-menu button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== ✅ NOUVEAU : BOUTON ADMIN ===== */
+.admin-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  color: #5a4a3f;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+
+.admin-button svg {
+  width: 26px;
+  height: 26px;
+  stroke-width: 2;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .header {
+    padding: 20px 60px;
+  }
+  
+  .nav {
+    margin-left: 60px;
+  }
+  
+  .admin-button {
+    width: 54px;
+    height: 54px;
+  }
+  
+  .admin-button svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 16px 40px;
+  }
+  
+  .header-right {
+    gap: 16px;
+  }
+  
+  .nav {
+    margin-left: 40px;
+  }
+  
+  .nav a {
+    margin: 0 12px;
+    font-size: 13px;
+  }
+  
+  .accessibility {
+    padding: 10px 18px;
+    font-size: 11px;
+  }
+  
+  .admin-button {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .admin-button svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 14px 24px;
+  }
+  
+  .header-right {
+    gap: 12px;
+  }
+  
+  .nav {
+    display: none; /* Masquer la navigation sur mobile (à remplacer par un burger menu) */
+  }
+  
+  .accessibility {
+    padding: 8px 16px;
+    font-size: 10px;
+  }
+  
+  .admin-button {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .admin-button svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+.menu-access {
+    position: absolute;
+    right: 0;
+    top: 55px;
+    background: #6f5f59;
+    border-radius: 15px;
+    display: none;
+    flex-direction: column;
+    padding: 10px;
+    min-width: 180px;
+}
+
+.menu-access.open {
+    display: flex;
+}
+
+.menu-access button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.menu-access button:hover {
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+}

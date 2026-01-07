@@ -1,0 +1,127 @@
+{# templates/reservation/service.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Zenlya - Sélection des services{% endblock %}
+
+{% block stylesheets %}
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% endblock %}
+{% set current_page = 'reservation' %}
+{% block body %}
+    <body class="page-reservation-service">
+
+    <!-- CONTAINER PRINCIPAL -->
+    <div class="container">
+        <!-- PROGRESS BAR -->
+        <div class="progress-bar">
+            <div class="step completed">
+                <img src="{{ asset('images/reservation.jpg') }}" alt="Illustration" class="side-image">
+            </div>
+
+            <div class="progress-bar-vertical">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Services</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Créneau</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Informations</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Confirmation</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENU PRINCIPAL -->
+        <div class="content-wrapper">
+            <div class="main-content">
+                <div class="card">
+                    <h1 class="title">Sélection des services</h1>
+                    <p class="subtitle">
+                        Cette première sélection permet d'adapter les créneaux disponibles
+                        à la durée des séances
+                    </p>
+
+                    {# DISCIPLINE PRINCIPALE #}
+                    <section class="section">
+                        <h2 class="section-title">Discipline principale</h2>
+                        <div class="discipline-grid" id="disciplineGrid"></div>
+                    </section>
+
+                    {# TYPE DE SÉANCE #}
+                    <section class="section" id="sessionSection" style="display:none;">
+                        <h2 class="section-title">Type de séance</h2>
+                        <div class="session-list" id="sessionList"></div>
+                    </section>
+
+                    {# OPTIONS SUPPLÉMENTAIRES #}
+                    <section class="section" id="optionsSection" style="display:none;">
+                        <h2 class="section-title">Options supplémentaires</h2>
+                        <div class="options-list" id="optionsList"></div>
+                    </section>
+                </div>
+            </div>
+
+            {# ASIDE / RÉSUMÉ #}
+            <aside class="sidebar">
+                <div class="summary-card">
+                    <h3 class="summary-title">Résumé de votre réservation</h3>
+
+                    <div class="summary-details">
+                        <p><span>Discipline :</span> <strong id="summaryDiscipline">—</strong></p>
+                        <p><span>Type de séance :</span> <strong id="summarySession">—</strong></p>
+                        <p><span>Durée totale :</span> <strong id="summaryDuration">—</strong></p>
+                    </div>
+
+                    <div class="summary-options" id="summaryOptions" style="display:none;">
+                        <p class="options-title">Options :</p>
+                        <div id="optionsListSummary"></div>
+                    </div>
+
+                    <div class="total" id="totalPrice">TOTAL : 0€</div>
+
+                    <button id="nextButton" class="btn-next">
+                        Choisir un créneau <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <h4>Me contacter</h4>
+                <p>06-06-06-06-06<br>lyacoach@gmail.com</p>
+            </div>
+
+            <div>
+                <h4>Réseaux sociaux</h4>
+                <p>YouTube : lyacoach<br>Instagram : @lyacoach</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 Lya · Coach Bien-être · Tous droits réservés</p>
+            <div class="footer-logo">
+                <img src="{{ asset('images/logo2.svg') }}" alt="Zenlya">
+            </div>
+        </div>
+    </footer>
+    <script>
+        const routeCreneaux = "{{ path('app_creneaux') }}";
+    </script>
+    <script src="{{ asset('js/service.js') }}"></script>
+
+    </body>
+{% endblock %}

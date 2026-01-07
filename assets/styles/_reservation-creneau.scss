@@ -1,0 +1,710 @@
+// ============================================
+// RESERVATION CRENEAU PAGE - SCSS
+// ============================================
+
+// Variables
+$brown-dark: #4b3a33;
+$brown: #8b7b73;
+$brown-light: #8b7368;
+$text-main: #2f2a27;
+$text-muted: #7d736d;
+$border-soft: #e3d9d2;
+$bg-light: #f5f1ed;
+$bg-cream: #faf8f6;
+$white: #ffffff;
+
+// ============================================
+// SPECIFICITÉ : Page créneau uniquement
+// ============================================
+
+body.page-reservation-creneau {
+  font-family: "Georgia", "Times New Roman", serif;
+  background: linear-gradient(135deg, $bg-light 0%, $bg-cream 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  // CONTAINER
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem 0 !important;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    min-height: calc(100vh - 120px);
+    position: relative;
+
+    &::before {
+      content: none;
+    }
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 0 1.5rem 1.5rem 1.5rem !important;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0 1rem 1rem 1rem !important;
+    }
+  }
+
+  // PROGRESS BAR (LEFT SIDE)
+  .progress-bar {
+    position: sticky;
+    top: 0;
+    height: fit-content;
+    padding: 1rem 0 0 0 !important;
+    margin: 0 !important;
+    width: 300px;
+
+    > .step.completed:first-child {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100%;
+    }
+
+    @media (max-width: 1024px) {
+      position: relative;
+      top: 0;
+      padding-top: 2rem !important;
+      width: 100%;
+    }
+  }
+
+  .side-image {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 660px;
+    object-fit: cover;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block;
+
+    @media (max-width: 1024px) {
+      height: 500px;
+    }
+
+    @media (max-width: 768px) {
+      height: 350px;
+    }
+  }
+
+  .progress-bar-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 !important;
+    margin: 1.5rem 0 0 0 !important;
+    width: 100%;
+    align-items: center;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: -3rem;
+      transform: translateX(-50%);
+      width: 2px;
+      height: calc(100% + 1rem);
+      background: #4B3935;
+      z-index: 0;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: 0 !important;
+      padding: 0 !important;
+      width: auto;
+      margin-bottom: 4rem !important;
+
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
+
+     &-number {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        border: 2px solid #4B3935;
+        background: #faf8f6 !important;  // 🔥 PAR DÉFAUT : TOUS CLAIRS
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #4B3935 !important;  // 🔥 PAR DÉFAUT : TEXTE MARRON
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+        font-family: 'Montserrat', sans-serif;
+        z-index: 2;
+        position: relative; 
+      }
+
+      &-label {
+        display: none !important;
+      }
+    }
+
+    .step-line {
+      display: none;
+    }
+  }
+
+ .progress-bar-vertical .step:nth-child(1) .step-number,
+  .progress-bar-vertical .step:nth-child(3) .step-number,
+  .progress-bar-vertical .step:nth-child(4) .step-number {
+    background: #faf8f6 !important;
+    border-color: #4B3935 !important;
+    color: #4B3935 !important;
+  }
+  
+  // 🔥 SEULE L'ÉTAPE 2 EST COLORÉE
+  .progress-bar-vertical .step:nth-child(2) .step-number {
+    background: #4B3935 !important;
+    border-color: #4B3935 !important;
+    color: #ffffff !important;
+  }
+
+  
+  // FORCER l'étape 2 à être colorée
+  .progress-bar-vertical .step:nth-child(2) .step-number {
+    background: #4B3935 !important;
+    color: #ffffff !important;
+  }
+
+  // CONTENT WRAPPER
+  .content-wrapper {
+    width: 100%;
+    padding: 1rem 0 0 0;
+    margin: 0;
+    display: flex;
+    gap: 32px;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+  .card {
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+  }
+
+  // TITRES
+  .title {
+    font-family: 'Candlescript Demo Version', cursive;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #2c2623;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+    padding: 0;
+    background: transparent;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    color: #6b5d54;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    padding: 0;
+    background: transparent;
+  }
+
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: $text-main;
+  }
+
+  // INFO BANNER
+  .info-banner {
+    border: 1.5px solid $border-soft;
+    border-radius: 20px;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+    background: transparent;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 32px;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: $text-main;
+
+    .info-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: $text-main;
+    }
+  }
+
+  // DATE SELECTOR
+  .date-selector-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .date-display {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 50px;
+    border: 1.5px solid $border-soft;
+    background: transparent;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-align: center;
+    color: $text-main;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: $brown-light;
+    }
+  }
+
+  // CUSTOM CALENDAR
+  .custom-calendar-popup {
+    display: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    background: transparent;
+    border: 6px solid #b8a599 !important;
+    border-radius: 24px;
+    padding: 32px;
+    width: 100% !important;
+    max-width: 600px !important;
+    z-index: 1;
+    box-shadow: none;
+    margin-top: 12px;
+    margin-bottom: 48px;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .calendar-title {
+    font-family: 'Times New Roman Italic', 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 2.2rem;
+    color: $brown-dark;
+    font-weight: 400;
+  }
+
+  .calendar-nav-btn {
+    background: none;
+    border: none;
+    color: $brown-dark;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 8px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .calendar-month-year {
+    text-align: right;
+    font-size: 1.1rem;
+    color: $text-main;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  .calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: $text-muted;
+    margin-bottom: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .calendar-days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    text-align: center;
+  }
+
+  .calendar-day {
+    width: 52px;
+    height: 52px;
+    line-height: 46px;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    color: $text-main;
+    background: transparent;
+    border: 3px solid transparent;
+
+    &.inactive {
+      color: lighten($border-soft, 5%);
+      cursor: default;
+      border-color: transparent;
+    }
+
+    &.disabled {
+      color: lighten($border-soft, 5%);
+      cursor: not-allowed;
+      background: transparent;
+      border-color: transparent;
+    }
+
+    &:not(.inactive):not(.disabled) {
+      border-color: darken($border-soft, 8%);
+    }
+
+    &:not(.inactive):not(.disabled):hover {
+      border-color: $brown-light;
+      background-color: transparent;
+    }
+
+    &.selected {
+      background: $brown-dark;
+      color: $white;
+      font-weight: 600;
+      border-color: $brown-dark;
+    }
+  }
+
+  // TIME SECTION
+  #timeSection {
+    margin-top: 48px;
+  }
+
+  #timeTitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: $text-main;
+  }
+
+  // TIME SLOTS
+  .time-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .time-slot {
+    border: 1.5px solid $border-soft;
+    border-radius: 20px;
+    padding: 20px 24px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+
+    &:hover {
+      border-color: $brown-light;
+      transform: translateY(-2px);
+    }
+
+    &.selected {
+      background: $brown-dark;
+      border-color: $brown-dark;
+
+      .time-range {
+        color: $white;
+      }
+
+      .time-status {
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+
+  .time-range {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $text-main;
+    margin-bottom: 6px;
+  }
+
+  .time-status {
+    font-size: 0.85rem;
+    color: $text-muted;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    i {
+      font-size: 0.75rem;
+    }
+  }
+
+  // SIDEBAR
+  .sidebar {
+    width: 360px;
+    flex-shrink: 0;
+
+    @media (max-width: 1024px) {
+      width: 100%;
+      order: -1;
+    }
+  }
+
+  .summary-card {
+    background-color: $brown;
+    color: white;
+    border-radius: 24px;
+    padding: 32px;
+    position: sticky;
+    top: 40px;
+
+    @media (max-width: 1024px) {
+      position: static;
+    }
+  }
+
+  .summary-title {
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  #dateTitle {
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+    font-weight: 600;
+    color: $white;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .summary-section {
+    margin-bottom: 32px;
+
+    .section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  .session-details,
+  .recommended-slots {
+    font-size: 0.9rem;
+    color: $white;
+    line-height: 1.8;
+
+    div {
+      margin-bottom: 4px;
+    }
+  }
+
+  // Alerte
+  .summary-section {
+    .recommended-slots + div {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-top: 20px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      i {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  // TOTAL
+  .total-summary {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 24px;
+    margin-top: 32px;
+  }
+
+  .total-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+
+    .total-label {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+    }
+
+    .total-amount {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+  }
+
+  // NAVIGATION BUTTONS
+  .navigation-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .btn-back,
+  .btn-next {
+    flex: 1;
+    border-radius: 50px;
+    padding: 14px 24px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    i {
+      font-size: 0.8rem;
+    }
+  }
+
+  .btn-back {
+    background: rgba(255, 255, 255, 0.2);
+    color: $white;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .btn-next {
+    background: $white;
+    color: $brown-dark;
+
+    &:hover:not(:disabled) {
+      background: darken($white, 5%);
+      transform: translateY(-2px);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  // RESPONSIVE
+  @media (max-width: 1024px) {
+    .time-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .time-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .content-wrapper {
+      flex-direction: column;
+    }
+
+    .custom-calendar-popup {
+      width: calc(100vw - 2rem);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .title {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 0.875rem;
+    }
+
+    .calendar-title {
+      font-size: 1.8rem;
+    }
+  }
+}
+body.page-reservation-creneau {
+  
+  // Enlever la limitation de largeur du container parent
+  .date-selector-container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  
+  // Le calendrier peut maintenant prendre toute la largeur
+  .custom-calendar-popup {
+    border: 6px solid #b8a599 !important;
+    max-width: 650px !important;
+    width: 100% !important;
+  }
+}

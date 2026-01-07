@@ -1,0 +1,179 @@
+{% extends 'base.html.twig' %}
+{% set current_page = 'about' %}
+{% block title %}À propos – Zenlya{% endblock %}
+
+{% block body %}
+<body class="page-about">
+
+<main>
+
+    <!-- ================== ABOUT INTRO ================== -->
+    <section class="about-intro">
+        <div class="about-container">
+            <h1 class="about-main-title">Mieux me connaître</h1>
+
+            <!-- SECTION 1 -->
+            <div class="about-section">
+                <div class="about-image">
+                    <img src="{{ asset('images/apropos1.jpg') }}" alt="Lya coach">
+                </div>
+                <div class="about-content">
+                    <h2 class="about-subtitle">Qui suis-je ?</h2>
+                    <p>Coach certifiée avec 8 ans d'expérience, je vous accompagne à domicile pour des séances 100% personnalisées. Diplômée d'État et formée dans plusieurs disciplines (Pilates, Yin Yoga, Fitness), j'allie rigueur, bienveillance et adaptation à chaque profil.</p>
+                    <p>Ma méthode unique allie performance et bien-être pour vous libérer du stress et rééquilibrer le corps/esprit. Je mets tout professionnalisme au service de vos objectifs (tonification, posture, mobilité, détente, bienveillance) ou vous apporter mon expertise en toute confiance.</p>
+                    <p>Découvrez le sport adapté à VOS objectifs, encadré par une professionnelle qualifiée et à votre écoute.</p>
+                </div>
+            </div>
+
+            <!-- SECTION 2 -->
+            <div class="about-section reverse">
+                <div class="about-content">
+                    <p>Passionnée par le sport et le bien-être depuis toujours, j'ai fait de ma passion mon métier. Diplômée d'État et certifiée dans plusieurs disciplines, je suis convaincue que l'activité physique doit être accessible à tous, accompagnement possible.</p>
+                    <p>Mon parcours inclut des certifications en coaching sportif, Yoga, Pilates, et nutrition bien-être. J'aide mes client(e)s à atteindre leurs objectifs tout en développant une approche holistique qui prend en compte votre corps, votre esprit et vos objectifs personnels.</p>
+                    <p>Je crois fermement que le sport doit être un plaisir, pas une contrainte, et que chaque personne mérite un accompagnement professionnel et personnalisé pour atteindre ses objectifs en toute sécurité.</p>
+                </div>
+                <div class="about-image">
+                    <img src="{{ asset('images/apropos2.jpg') }}" alt="Lya séance">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================== VALEURS ================== -->
+    <section class="values-section">
+        <div class="values-container">
+            <h2 class="values-title">Mes valeurs</h2>
+            <div class="values-card">
+                <div class="values-image">
+                    <img src="{{ asset('images/apropos3.jpg') }}" alt="Équipement Pilates">
+                </div>
+                <div class="values-content">
+
+                    <div class="value-item">
+                        <div class="value-icon">
+                            {% include '_svg/check.svg.twig' %}
+                        </div>
+                        <div class="value-text">
+                            <h3>Personnalisation</h3>
+                            <p>Chaque personne est unique. Je crée des programmes sur-mesure adaptés à votre niveau, vos besoins et vos contraintes.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="value-item">
+                        <div class="value-icon">
+                            {% include '_svg/check.svg.twig' %}
+                        </div>
+                        <div class="value-text">
+                            <h3>Bienveillance</h3>
+                            <p>Un accompagnement sans jugement dans une atmosphère positive et encourageante pour progresser en confiance.</p>
+                        </div>
+                    </div>
+
+                    <div class="value-item">
+                        <div class="value-icon">
+                            {% include '_svg/check.svg.twig' %}
+                        </div>
+                        <div class="value-text">
+                            <h3>Durabilité</h3>
+                            <p>Je privilégie les résultats sur le long terme avec des habitudes saines que vous pourrez maintenir toute votre vie.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================== MÉTHODE ================== -->
+    <section class="method-section">
+        <div class="method-container">
+            <h2 class="method-title">Ma méthode unique</h2>
+            <div class="method-grid">
+
+                <div class="method-card">
+                    <div class="method-number">1</div>
+                    <div class="method-content">
+                        <h3>Évaluation personnalisée</h3>
+                        <p>Je commence par comprendre votre histoire, vos objectifs, votre condition physique et vos éventuelles limitations pour créer un programme parfaitement adapté.</p>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-number">2</div>
+                    <div class="method-content">
+                        <h3>Accompagnement à domicile</h3>
+                        <p>Je me déplace chez vous avec tout le matériel nécessaire. Vous économisez du temps et profitez d'un coaching dans le confort de votre environnement.</p>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-number">3</div>
+                    <div class="method-content">
+                        <h3>Suivi régulier et ajustements</h3>
+                        <p>Je reste à votre écoute et adapte le programme en fonction de vos progrès et de votre ressenti pour garantir des résultats optimaux.</p>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-number">4</div>
+                    <div class="method-content">
+                        <h3>Équilibre corps & esprit</h3>
+                        <p>Ma méthode intègre des techniques de respiration, de relaxation et de développement personnel pour un bien-être global et durable.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================== CERTIFICATIONS ================== -->
+    <section class="certifications-section">
+        <div class="certifications-container">
+            <h2 class="certifications-title">Mes Certifications & Formations Professionnelles</h2>
+            <p class="certifications-intro">En tant que coach certifiée, je détiens toutes les qualifications nécessaires pour vous accompagner en toute sécurité et professionnalisme. Mon engagement envers l'excellence m'a conduit à obtenir plusieurs certifications reconnues et à participer régulièrement à des formations continues pour rester à jour avec les dernières avancées dans le domaine du sport et du bien-être.</p>
+
+            <div class="certifications-grid">
+                <div class="certification-badge">{% include '_svg/check.svg.twig' %}<span>Coach sportif diplômé d'État (BPJEPS)</span></div>
+                <div class="certification-badge">{% include '_svg/check.svg.twig' %}<span>Instructeur Yoga certifié RYT 200h</span></div>
+                <div class="certification-badge">{% include '_svg/check.svg.twig' %}<span>Formation Pilates Matwork</span></div>
+                <div class="certification-badge">{% include '_svg/check.svg.twig' %}<span>Nutrition & bien-être sportif</span></div>
+                <div class="certification-badge">{% include '_svg/check.svg.twig' %}<span>Premiers secours PSC1</span></div>
+                <div class="certification-badge">{% include '_svg/check.svg.twig' %}<span>Formation anatomie & physiologie</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================== CTA ================== -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2 class="cta-title">Prêt(e) à commencer votre transformation ?</h2>
+            <p class="cta-subtitle">Réservez votre première séance découverte dès maintenant.</p>
+            <a href="{{ path('app_reservation') }}" class="cta-button">Réserver ma séance →</a>
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div>
+            <h4>Me contacter</h4>
+            <p>06-06-06-06-06<br>Adresse mail : lyacoach@gmail.com</p>
+        </div>
+        <div>
+            <h4>Réseaux Sociaux</h4>
+            <p>YouTube : lyacoach<br>Instagram : @lyacoach</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 Lya · Coach Bien-être · Tous droits réservés<br>Mentions légales · Politique de confidentialité</p>
+        <div class="footer-logo">
+            <img src="{{ asset('images/logo2.svg') }}" alt="Zenlya">
+        </div>
+    </div>
+</footer>
+
+{# ====== SCRIPT JS À PART ===== #}
+{% endblock %}

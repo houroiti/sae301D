@@ -1,0 +1,76 @@
+/* ========================================
+   STYLE.SCSS - FICHIER PRINCIPAL
+======================================== */
+
+// 1. Variables (couleurs, fonts, etc.)
+@import 'variables';
+
+// 2. Mixins (breakpoints, utilitaires)
+@import 'mixins';
+
+// 3. Base (reset, typographie)
+@import 'base';
+@import 'fonts';
+
+// 4. Layout (header, footer)
+@import 'header';
+@import 'footer';
+
+// 5. Pages
+@import 'home';
+@import 'about';
+@import 'services';
+@import 'articles';
+@import 'client';
+
+// 6. Composants
+@import 'alignment';
+
+// 7. Réservations
+@import 'reservation-service';
+@import 'reservation-creneau';
+@import 'reservation-confirmation';
+
+// 8. Dark mode
+@import 'dark-mode';
+
+/* ========================================
+   NOTES D'UTILISATION DES MIXINS
+======================================== */
+
+/*
+BREAKPOINTS DISPONIBLES:
+- @include xs    // max-width: 480px
+- @include sm    // max-width: 600px
+- @include md    // max-width: 768px
+- @include lg    // max-width: 1024px
+- @include xl    // max-width: 1200px
+- @include xxl   // max-width: 1400px
+
+EXEMPLE D'UTILISATION:
+
+.ma-section {
+  padding: 80px;
+  
+  @include lg {
+    padding: 60px;
+  }
+  
+  @include md {
+    padding: 40px;
+  }
+  
+  @include sm {
+    padding: 24px;
+  }
+}
+
+MIXINS UTILES:
+- @include responsive-padding;           // Padding qui s'adapte
+- @include responsive-font(48px, 36px, 28px);  // Font responsive
+- @include responsive-radius(24px);      // Border-radius responsive
+- @include flex-center;                  // Flexbox centré
+- @include container(1200px);            // Container avec max-width
+- @include transition(all, 0.3s);        // Transition
+- @include grid-responsive(3, 20px);     // Grid responsive
+*/

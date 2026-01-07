@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Zenlya</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+<div class="container">
+    <!-- Barre de progression -->
+    <div class="progress-bar">
+        <div class="step completed">
+            <img src="{{ asset('images/reservation.jpg') }}" alt="Illustration" class="side-image">
+        </div>
+        <div class="progress-bar-vertical">
+            <div class="step completed">
+                <div class="step-number">1</div>
+                <div class="step-label">Services</div>
+            </div>
+            <div class="step-line completed"></div>
+
+            <div class="step completed">
+                <div class="step-number">2</div>
+                <div class="step-label">Créneau</div>
+            </div>
+            <div class="step-line completed"></div>
+
+            <div class="step active">
+                <div class="step-number">3</div>
+                <div class="step-label">Informations</div>
+            </div>
+            <div class="step-line completed"></div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-label">Confirmation</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="main-content">
+            <div class="card">
+                <h2 class="title">Informations personnelles</h2>
+                <p class="subtitle">Complétez vos informations pour finaliser la réservation</p>
+
+                <!-- Progress Indicator -->
+                <div class="form-progress">
+                    <div class="form-step">
+                        <div class="step-icon active">❶</div>
+                        <div class="step-label">Identité</div>
+                    </div>
+                    <div class="form-step">
+                        <div class="step-icon">❷</div>
+                        <div class="step-label">Adresse</div>
+                    </div>
+                    <div class="form-step">
+                        <div class="step-icon">❸</div>
+                        <div class="step-label">Santé</div>
+                    </div>
+                </div>
+
+                <!-- Section 1: Identity -->
+                <div class="form-section" id="identitySection">
+                    <h3 class="section-title">Identité (obligatoire)</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Civilité *</label>
+                            <select id="civility" class="form-select">
+                                <option value="">Sélectionnez</option>
+                                <option value="mme">Madame</option>
+                                <option value="m">Monsieur</option>
+                                <option value="nb">Non-binaire</option>
+                            </select>
+                            <div class="error-message" id="civilityError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nom de famille *</label>
+                            <input type="text" id="lastName" class="form-input" maxlength="50">
+                            <div class="error-message" id="lastNameError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Prénom *</label>
+                            <input type="text" id="firstName" class="form-input" maxlength="50">
+                            <div class="error-message" id="firstNameError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Date de naissance *</label>
+                            <input type="date" id="birthDate" class="form-input">
+                            <div class="error-message" id="birthDateError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email *</label>
+                            <input type="email" id="email" class="form-input" placeholder="exemple@email.com">
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Téléphone *</label>
+                            <input type="tel" id="phone" class="form-input" placeholder="06 12 34 56 78">
+                            <div class="error-message" id="phoneError"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Address -->
+                <div class="form-section" id="addressSection">
+                    <h3 class="section-title">Adresse & accès (obligatoire)</h3>
+                    <div class="form-stack">
+                        <div class="form-group">
+                            <label class="form-label">Adresse complète *</label>
+                            <input type="text" id="street" class="form-input" placeholder="15 Rue de la Paix, 75002 Paris">
+                            <div class="error-message" id="streetError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Complément d'adresse</label>
+                            <input type="text" id="complement" class="form-input" placeholder="Appartement, étage, digicode...">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Type de logement *</label>
+                                <select id="housingType" class="form-select">
+                                    <option value="">Sélectionnez</option>
+                                    <option value="appartement">Appartement</option>
+                                    <option value="maison">Maison</option>
+                                    <option value="bureau">Bureau</option>
+                                </select>
+                                <div class="error-message" id="housingTypeError"></div>
+                            </div>
+                            <div class="form-group" id="floorGroup" style="display: none;">
+                                <label class="form-label">Étage</label>
+                                <input type="number" id="floor" class="form-input" min="0" max="50">
+                            </div>
+                        </div>
+                        <div class="form-group" id="elevatorGroup" style="display: none;">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="hasElevator">
+                                <span>Présence d'ascenseur</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Informations d'accès</label>
+                            <textarea id="accessInfo" class="form-textarea" rows="3" placeholder="Digicode, interphone, instructions..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Zone de stationnement *</label>
+                            <select id="parking" class="form-select">
+                                <option value="">Sélectionnez</option>
+                                <option value="rue">Rue (gratuit)</option>
+                                <option value="payant">Parking payant</option>
+                                <option value="prive">Cour privée</option>
+                            </select>
+                            <div class="error-message" id="parkingError"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Health -->
+                <div class="form-section health-section" id="healthSection">
+                    <h3 class="section-title">Santé & préférences (recommandé)</h3>
+                    <div class="form-stack">
+                        <div class="form-group">
+                            <label class="form-label">Niveau sportif actuel</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="activityLevel" value="debutant">
+                                    <span>Débutant</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="activityLevel" value="intermediaire">
+                                    <span>Intermédiaire</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="activityLevel" value="avance">
+                                    <span>Avancé</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Objectifs principaux</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" value="Perte de poids">
+                                    <span>Perte de poids</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" value="Gain musculaire">
+                                    <span>Gain musculaire</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" value="Soulagement du stress">
+                                    <span>Soulagement du stress</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" value="Amélioration du sommeil">
+                                    <span>Amélioration du sommeil</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" value="Réduction des douleurs dorsales">
+                                    <span>Réduction des douleurs dorsales</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Blessures ou limitations</label>
+                            <textarea id="injuries" class="form-textarea" rows="2" placeholder="Problèmes de dos, genoux, épaules..."></textarea>
+                            <div class="form-hint">Ces informations restent confidentielles</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Consents -->
+                <div class="form-section" id="consentsSection">
+                    <h3 class="section-title">Consentements (obligatoire)</h3>
+                    <div class="consents-list">
+                        <label class="consent-label">
+                            <input type="checkbox" id="healthInfo">
+                            <span>Je certifie que les informations de santé fournies sont exactes *</span>
+                        </label>
+                        <label class="consent-label">
+                            <input type="checkbox" id="communications">
+                            <span>J'autorise le coach à m'envoyer des rappels et conseils par email</span>
+                        </label>
+                    </div>
+                    <div class="error-message" id="consentsError"></div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="navigation-buttons">
+                    <a class="btn-back" href="{{ path('app_creneaux') }}">
+                        <i class="fas fa-chevron-left"></i> Retour au calendrier
+                    </a>
+                    <button class="btn-next" id="nextButton" data-confirmation-url="{{ path('app_confirmation') }}" disabled>
+                        Valider ma réservation <i class="fas fa-check"></i>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('js/client.js') }}"></script>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div>
+            <h4>Me contacter</h4>
+            <p>
+                06-06-06-06-06<br>
+                Adresse mail : lyacoach@gmail.com
+            </p>
+        </div>
+
+        <div>
+            <h4>Réseaux Sociaux</h4>
+            <p>
+                YouTube : lyacoach<br>
+                Instagram : @lyacoach
+            </p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2024 Lya · Coach Bien-être · Tous droits réservés<br>
+            Mentions légales · Politique de confidentialité
+        </p>
+        <div class="footer-logo">
+            <img src="{{ asset('images/logo2.svg') }}" alt="Zenlya">
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

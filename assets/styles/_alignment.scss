@@ -1,0 +1,48 @@
+/* ============================================
+   FORCE LEFT ALIGNMENT - OVERRIDE FILE
+   ============================================
+   Ajoutez ce fichier APRÈS tous les autres CSS
+   ============================================ */
+
+/* Force container to have no left padding */
+.container {
+  padding-left: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Force progress bar column to start at 0 */
+.progress-bar {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Force image to be flush left with no margins */
+.side-image {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-radius: 0 !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+/* Force progress bar vertical to have no left space */
+.progress-bar-vertical {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Remove any left margins/padding from step items */
+.progress-bar .step {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Specifically target the step that contains the image */
+.progress-bar > .step.completed:first-child {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}

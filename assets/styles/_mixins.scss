@@ -1,0 +1,165 @@
+/* ========================================
+   MIXINS RESPONSIVE - BREAKPOINTS
+======================================== */
+
+// Breakpoints
+$breakpoint-xs: 480px;
+$breakpoint-sm: 600px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Mixins responsive
+@mixin xs {
+  @media (max-width: #{$breakpoint-xs}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (max-width: #{$breakpoint-sm}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (max-width: #{$breakpoint-xl}) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media (max-width: #{$breakpoint-xxl}) {
+    @content;
+  }
+}
+
+// Mixin personnalisé
+@mixin respond-to($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+/* ========================================
+   MIXINS UTILITAIRES
+======================================== */
+
+// Flexbox center
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Responsive padding
+@mixin responsive-padding {
+  padding: 80px;
+  
+  @include lg {
+    padding: 60px;
+  }
+  
+  @include md {
+    padding: 50px 40px;
+  }
+  
+  @include sm {
+    padding: 40px 24px;
+  }
+}
+
+// Responsive font size
+@mixin responsive-font($desktop, $tablet: null, $mobile: null) {
+  font-size: $desktop;
+  
+  @if $tablet {
+    @include md {
+      font-size: $tablet;
+    }
+  }
+  
+  @if $mobile {
+    @include sm {
+      font-size: $mobile;
+    }
+  }
+}
+
+// Container max-width
+@mixin container($max-width: 1400px) {
+  max-width: $max-width;
+  margin: 0 auto;
+  width: 100%;
+}
+
+// Button reset
+@mixin button-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+// Transition
+@mixin transition($properties: all, $duration: 0.3s, $easing: ease) {
+  transition: $properties $duration $easing;
+}
+
+// Border radius responsive
+@mixin responsive-radius($desktop: 24px) {
+  border-radius: $desktop;
+  
+  @include md {
+    border-radius: calc($desktop * 0.85);
+  }
+  
+  @include sm {
+    border-radius: calc($desktop * 0.7);
+  }
+}
+
+// Hide on mobile
+@mixin hide-mobile {
+  @include sm {
+    display: none;
+  }
+}
+
+// Show only on mobile
+@mixin show-mobile {
+  display: none;
+  
+  @include sm {
+    display: block;
+  }
+}
+
+// Grid responsive
+@mixin grid-responsive($columns, $gap: 20px) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+  
+  @include md {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include sm {
+    grid-template-columns: 1fr;
+  }
+}

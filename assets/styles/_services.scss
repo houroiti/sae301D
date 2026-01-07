@@ -1,0 +1,1087 @@
+/* =========================
+   PAGE SERVICES - BANNIÈRE
+========================= */
+
+.services-banner {
+  max-width: 1400px;
+  margin: 0 auto 80px;
+  padding: 0 80px;
+}
+
+.services-banner-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.services-banner-container img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+}
+
+/* TEXTE SUR L'IMAGE */
+.services-banner-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+}
+
+/* TITRE PRINCIPAL */
+.services-banner-text h1 {
+  font-family: 'GlamourLocale';
+  font-size: 80px;
+  font-weight: normal;
+  margin: 0 0 50px;
+}
+
+/* SOUS-TITRES */
+.services-banner-links {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+}
+
+.services-banner-links a {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 38px;
+  font-weight: normal;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.services-banner-links a:hover {
+  opacity: 0.7;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .services-banner {
+    padding: 0 60px;
+    margin-bottom: 70px;
+  }
+  
+  .services-banner-container img {
+    height: 380px;
+  }
+  
+  .services-banner-text h1 {
+    font-size: 70px;
+    margin-bottom: 45px;
+  }
+  
+  .services-banner-links {
+    gap: 70px;
+  }
+  
+  .services-banner-links a {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-banner {
+    padding: 0 40px;
+    margin-bottom: 60px;
+  }
+  
+  .services-banner-container img {
+    height: 350px;
+  }
+  
+  .services-banner-text h1 {
+    font-size: 60px;
+    margin-bottom: 40px;
+  }
+  
+  .services-banner-links {
+    gap: 50px;
+  }
+  
+  .services-banner-links a {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .services-banner {
+    padding: 0 24px;
+    margin-bottom: 50px;
+  }
+  
+  .services-banner-container {
+    border-radius: 24px;
+  }
+  
+  .services-banner-container img {
+    height: 300px;
+  }
+  
+  .services-banner-text h1 {
+    font-size: 48px;
+    margin-bottom: 30px;
+  }
+  
+  .services-banner-links {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .services-banner-links a {
+    font-size: 26px;
+  }
+}
+/* =========================
+   YIN YOGA - SECTION
+========================= */
+
+.yin-yoga-section {
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  padding: 0 80px;
+}
+
+.yin-yoga-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* TITRE DE SECTION */
+.yin-yoga-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.yin-yoga-header h2 {
+  font-family: 'GlamourLocale'; /* 🔥 Changé */
+  font-size: 70px;
+  font-weight: normal;
+  color: #3a332e;
+  margin-bottom: 12px;
+}
+
+.yin-yoga-header p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #3a332e;
+  margin: 0;
+}
+
+/* CARTES */
+.yin-yoga-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.yin-card {
+  background-color: #7a6a60;
+  border-radius: 40px;
+  padding: 50px;
+  color: #fbf7f2;
+}
+
+/* LAYOUT CARTE : IMAGE + HEADER EN HAUT */
+.yin-card-top {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 50px;
+  align-items: start;
+  margin-bottom: 50px;
+}
+
+/* IMAGE */
+.yin-card-image {
+  width: 100%;
+  height: 320px;
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.yin-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* HEADER DE CARTE (À DROITE DE L'IMAGE) */
+.yin-card-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.yin-card-header h3 {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 42px;
+  font-weight: normal;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.yin-card-badges {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.badge {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: transparent;
+  border: 1.5px solid #fbf7f2;
+  border-radius: 25px;
+  padding: 8px 20px;
+}
+
+.yin-card-description {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  opacity: 0.95;
+}
+
+/* SECTIONS BIENFAITS & SÉQUENCE EN BAS */
+.yin-card-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.yin-detail-section h4 {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 32px;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.yin-detail-section ul {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 1.9;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  opacity: 0.95;
+}
+
+.yin-detail-section ul li {
+  margin-bottom: 8px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .yin-yoga-section {
+    padding: 0 60px;
+    margin-bottom: 70px;
+  }
+  
+  .yin-yoga-header h2 {
+    font-size: 64px;
+  }
+  
+  .yin-card {
+    padding: 45px;
+  }
+  
+  .yin-card-top {
+    grid-template-columns: 380px 1fr;
+    gap: 45px;
+    margin-bottom: 45px;
+  }
+  
+  .yin-card-image {
+    height: 280px;
+  }
+  
+  .yin-card-header h3 {
+    font-size: 38px;
+  }
+  
+  .yin-card-details {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .yin-yoga-section {
+    padding: 0 40px;
+    margin-bottom: 60px;
+  }
+  
+  .yin-yoga-header h2 {
+    font-size: 56px;
+  }
+  
+  .yin-card {
+    padding: 40px;
+    border-radius: 32px;
+  }
+  
+  .yin-card-top {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 35px;
+  }
+  
+  .yin-card-image {
+    height: 240px;
+  }
+  
+  .yin-card-header h3 {
+    font-size: 34px;
+    margin-bottom: 20px;
+  }
+  
+  .yin-card-badges {
+    margin-bottom: 24px;
+  }
+  
+  .yin-card-description {
+    font-size: 14px;
+  }
+  
+  .yin-card-details {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .yin-detail-section h4 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .yin-yoga-section {
+    padding: 0 24px;
+    margin-bottom: 50px;
+  }
+  
+  .yin-yoga-header h2 {
+    font-size: 48px;
+  }
+  
+  .yin-card {
+    padding: 30px;
+    border-radius: 28px;
+  }
+  
+  .yin-card-top {
+    gap: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .yin-card-image {
+    height: 200px;
+    border-radius: 20px;
+  }
+  
+  .yin-card-header h3 {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+  
+  .yin-card-badges {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .badge {
+    font-size: 12px;
+    padding: 6px 16px;
+  }
+  
+  .yin-card-description {
+    font-size: 13px;
+  }
+  
+  .yin-detail-section h4 {
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
+  
+  .yin-detail-section ul {
+    font-size: 13px;
+  }
+}
+/* =========================
+   PILATES - SECTION
+========================= */
+
+.pilates-section {
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  padding: 0 80px;
+}
+
+.pilates-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* TITRE DE SECTION */
+.pilates-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.pilates-header h2 {
+  font-family: 'GlamourLocale';
+  font-size: 70px;
+  font-weight: normal;
+  color: #3a332e;
+  margin-bottom: 12px;
+}
+
+.pilates-header p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #3a332e;
+  margin: 0;
+}
+
+/* CARTES */
+.pilates-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.pilates-card {
+  background-color: #7a6a60;
+  border-radius: 40px;
+  padding: 50px;
+  color: #fbf7f2;
+}
+
+/* LAYOUT CARTE : IMAGE + HEADER EN HAUT */
+.pilates-card-top {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 50px;
+  align-items: start;
+  margin-bottom: 50px;
+}
+
+/* IMAGE */
+.pilates-card-image {
+  width: 100%;
+  height: 320px;
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.pilates-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* HEADER DE CARTE (À DROITE DE L'IMAGE) */
+.pilates-card-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.pilates-card-header h3 {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 42px;
+  font-weight: normal;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.pilates-card-badges {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.badge {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: transparent;
+  border: 1.5px solid #fbf7f2;
+  border-radius: 25px;
+  padding: 8px 20px;
+}
+
+.pilates-card-description {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  opacity: 0.95;
+  margin-bottom: 16px;
+}
+
+.pilates-card-option {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* SECTIONS BIENFAITS & SÉQUENCE EN BAS */
+.pilates-card-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.pilates-detail-section h4 {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 32px;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.pilates-detail-section ul {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 1.9;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  opacity: 0.95;
+}
+
+.pilates-detail-section ul li {
+  margin-bottom: 8px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .pilates-section {
+    padding: 0 60px;
+    margin-bottom: 70px;
+  }
+  
+  .pilates-header h2 {
+    font-size: 64px;
+  }
+  
+  .pilates-card {
+    padding: 45px;
+  }
+  
+  .pilates-card-top {
+    grid-template-columns: 380px 1fr;
+    gap: 45px;
+    margin-bottom: 45px;
+  }
+  
+  .pilates-card-image {
+    height: 280px;
+  }
+  
+  .pilates-card-header h3 {
+    font-size: 38px;
+  }
+  
+  .pilates-card-details {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pilates-section {
+    padding: 0 40px;
+    margin-bottom: 60px;
+  }
+  
+  .pilates-header h2 {
+    font-size: 56px;
+  }
+  
+  .pilates-card {
+    padding: 40px;
+    border-radius: 32px;
+  }
+  
+  .pilates-card-top {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 35px;
+  }
+  
+  .pilates-card-image {
+    height: 240px;
+  }
+  
+  .pilates-card-header h3 {
+    font-size: 34px;
+    margin-bottom: 20px;
+  }
+  
+  .pilates-card-badges {
+    margin-bottom: 24px;
+  }
+  
+  .pilates-card-description {
+    font-size: 14px;
+  }
+  
+  .pilates-card-details {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .pilates-detail-section h4 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pilates-section {
+    padding: 0 24px;
+    margin-bottom: 50px;
+  }
+  
+  .pilates-header h2 {
+    font-size: 48px;
+  }
+  
+  .pilates-card {
+    padding: 30px;
+    border-radius: 28px;
+  }
+  
+  .pilates-card-top {
+    gap: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .pilates-card-image {
+    height: 200px;
+    border-radius: 20px;
+  }
+  
+  .pilates-card-header h3 {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+  
+  .pilates-card-badges {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .badge {
+    font-size: 12px;
+    padding: 6px 16px;
+  }
+  
+  .pilates-card-description {
+    font-size: 13px;
+  }
+  
+  .pilates-card-option {
+    font-size: 13px;
+  }
+  
+  .pilates-detail-section h4 {
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
+  
+  .pilates-detail-section ul {
+    font-size: 13px;
+  }
+}
+/* =========================
+   FITNESS - SECTION
+========================= */
+
+.fitness-section {
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  padding: 0 80px;
+}
+
+.fitness-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* TITRE DE SECTION */
+.fitness-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.fitness-header h2 {
+  font-family: 'GlamourLocale';
+  font-size: 70px;
+  font-weight: normal;
+  color: #3a332e;
+  margin-bottom: 12px;
+}
+
+.fitness-header p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #3a332e;
+  margin: 0;
+}
+
+/* CARTES */
+.fitness-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.fitness-card {
+  background-color: #7a6a60;
+  border-radius: 40px;
+  padding: 50px;
+  color: #fbf7f2;
+}
+
+/* LAYOUT CARTE : IMAGE + HEADER EN HAUT */
+.fitness-card-top {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 50px;
+  align-items: start;
+  margin-bottom: 50px;
+}
+
+/* IMAGE */
+.fitness-card-image {
+  width: 100%;
+  height: 320px;
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.fitness-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* HEADER DE CARTE (À DROITE DE L'IMAGE) */
+.fitness-card-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.fitness-card-header h3 {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 42px;
+  font-weight: normal;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.fitness-card-badges {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.badge {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: transparent;
+  border: 1.5px solid #fbf7f2;
+  border-radius: 25px;
+  padding: 8px 20px;
+}
+
+.fitness-card-description {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  opacity: 0.95;
+  margin-bottom: 16px;
+}
+
+.fitness-card-option {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* SECTIONS BIENFAITS & SÉQUENCE EN BAS */
+.fitness-card-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.fitness-detail-section h4 {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 32px;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.fitness-detail-section ul {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 1.9;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  opacity: 0.95;
+}
+
+.fitness-detail-section ul li {
+  margin-bottom: 8px;
+}
+
+/* INFORMATIONS IMPORTANTES */
+.fitness-info-box {
+  background-color: #f5f0e8;
+  border-left: 4px solid #7a6a60;
+  border-radius: 12px;
+  padding: 40px 50px;
+  margin-top: 60px;
+}
+
+.fitness-info-box h3 {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 36px;
+  color: #3a332e;
+  margin-bottom: 30px;
+}
+
+.info-section {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #3a332e;
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+.info-section:last-child {
+  margin-bottom: 0;
+}
+
+.info-section strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.info-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-section ul li {
+  margin-bottom: 6px;
+  padding-left: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .fitness-section {
+    padding: 0 60px;
+    margin-bottom: 70px;
+  }
+  
+  .fitness-header h2 {
+    font-size: 64px;
+  }
+  
+  .fitness-card {
+    padding: 45px;
+  }
+  
+  .fitness-card-top {
+    grid-template-columns: 380px 1fr;
+    gap: 45px;
+    margin-bottom: 45px;
+  }
+  
+  .fitness-card-image {
+    height: 280px;
+  }
+  
+  .fitness-card-header h3 {
+    font-size: 38px;
+  }
+  
+  .fitness-card-details {
+    gap: 50px;
+  }
+  
+  .fitness-info-box {
+    padding: 35px 40px;
+  }
+  
+  .fitness-info-box h3 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .fitness-section {
+    padding: 0 40px;
+    margin-bottom: 60px;
+  }
+  
+  .fitness-header h2 {
+    font-size: 56px;
+  }
+  
+  .fitness-card {
+    padding: 40px;
+    border-radius: 32px;
+  }
+  
+  .fitness-card-top {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 35px;
+  }
+  
+  .fitness-card-image {
+    height: 240px;
+  }
+  
+  .fitness-card-header h3 {
+    font-size: 34px;
+    margin-bottom: 20px;
+  }
+  
+  .fitness-card-badges {
+    margin-bottom: 24px;
+  }
+  
+  .fitness-card-description {
+    font-size: 14px;
+  }
+  
+  .fitness-card-details {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .fitness-detail-section h4 {
+    font-size: 28px;
+  }
+  
+  .fitness-info-box {
+    padding: 30px 35px;
+    margin-top: 50px;
+  }
+  
+  .fitness-info-box h3 {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .fitness-section {
+    padding: 0 24px;
+    margin-bottom: 50px;
+  }
+  
+  .fitness-header h2 {
+    font-size: 48px;
+  }
+  
+  .fitness-card {
+    padding: 30px;
+    border-radius: 28px;
+  }
+  
+  .fitness-card-top {
+    gap: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .fitness-card-image {
+    height: 200px;
+    border-radius: 20px;
+  }
+  
+  .fitness-card-header h3 {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+  
+  .fitness-card-badges {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .badge {
+    font-size: 12px;
+    padding: 6px 16px;
+  }
+  
+  .fitness-card-description {
+    font-size: 13px;
+  }
+  
+  .fitness-card-option {
+    font-size: 13px;
+  }
+  
+  .fitness-detail-section h4 {
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
+  
+  .fitness-detail-section ul {
+    font-size: 13px;
+  }
+  
+  .fitness-info-box {
+    padding: 24px 28px;
+    margin-top: 40px;
+  }
+  
+  .fitness-info-box h3 {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  
+  .info-section {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+}

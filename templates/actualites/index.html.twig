@@ -1,0 +1,194 @@
+{% extends 'base.html.twig' %}
+{% set current_page = 'actualites' %}
+
+{% block title %}Zenlya – Actualités{% endblock %}
+
+{% block body %}
+
+    <section class="news-hero">
+        <div class="news-hero-container">
+            <img src="{{ asset('images/banniere.jpg') }}" alt="Actualités">
+            <div class="news-hero-text">
+                <h1>Mes derniers articles et actualités</h1>
+                <p>Découvrez mes conseils santé, astuces relaxation et développement personnel</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-section">
+        <div class="featured-container">
+            <h2 class="featured-title">À la une</h2>
+
+            <article class="featured-article">
+                <div class="article-badge">ARTICLE PHARE</div>
+                <h3 class="article-title">5 techniques de respiration pour gérer le stress</h3>
+                <div class="article-meta">
+                    <span>• 10 décembre 2024</span>
+                    <span>• 4 min de lecture</span>
+                    <span>• 15 commentaires</span>
+                </div>
+                <p class="article-excerpt">
+                    Vous souhaitez débuter le yoga chez vous ? Découvrez tous mes conseils pour
+                    créer votre espace zen, choisir votre tapis, et apprendre les postures de base
+                    en toute sécurité. Un guide complet pour débutants !
+                </p>
+                <a href="https://recap-sante.fr/les-secrets-dune-respiration-apaisante-pour-gerer-le-stress-quotidien/" class="article-link">
+                    Lire l'article →
+                </a>
+            </article>
+        </div>
+    </section>
+
+    <section class="articles-section">
+        <div class="articles-container">
+            <h2 class="articles-title">Derniers articles</h2>
+
+            <div class="articles-grid">
+
+                <!-- ARTICLE 1 -->
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="{{ asset('images/citron.jpg') }}" alt="Eau citronnée">
+                    </div>
+                    <div class="article-content">
+                        <span class="article-category">Astuces santé</span>
+                        <h3 class="article-card-title">Les bienfaits de l'eau citronnée le matin</h3>
+                        <div class="article-info">
+                            <span>8 déc 2025</span>
+                            <span>5 min</span>
+                        </div>
+                        <p class="article-description">
+                            Commencez votre journée avec cette habitude simple qui booste votre système immunitaire.
+                        </p>
+                        <a href="https://www.vogue.fr/beaute/article/eau-citronnee-5-bienfaits-expliques-nutritionniste" class="article-btn">
+                            Lire l'article →
+                        </a>
+                    </div>
+                </article>
+
+                <!-- ARTICLE 2 -->
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="{{ asset('images/meditation.jpg') }}" alt="Méditation">
+                    </div>
+                    <div class="article-content">
+                        <span class="article-category">Astuces relaxation</span>
+                        <h3 class="article-card-title">Méditation guidée de 10 minutes</h3>
+                        <div class="article-info">
+                            <span>6 déc 2025</span>
+                            <span>3 min</span>
+                        </div>
+                        <p class="article-description">
+                            Une séance courte mais efficace pour retrouver calme et clarté d'esprit.
+                        </p>
+                        <a href="https://www.youtube.com/watch?v=GaTZYHwDco0" class="article-btn">
+                            Lire l'article →
+                        </a>
+                    </div>
+                </article>
+
+                <!-- ARTICLE 3 -->
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="{{ asset('images/tapis.jpg') }}" alt="Yoga">
+                    </div>
+                    <div class="article-content">
+                        <span class="article-category">Astuces équipement</span>
+                        <h3 class="article-card-title">Yoga du soir pour mieux dormir</h3>
+                        <div class="article-info">
+                            <span>30 déc 2025</span>
+                            <span>5 min</span>
+                        </div>
+                        <p class="article-description">
+                            Une série de postures douces pour préparer votre corps au sommeil.
+                        </p>
+                        <a href="https://www.ify.fr/blog/yoga/yoga-du-soir/" class="article-btn">
+                            Lire l'article →
+                        </a>
+                    </div>
+                </article>
+
+                <!-- ARTICLE 4 -->
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="{{ asset('images/nourriture.jpg') }}" alt="Nutrition">
+                    </div>
+                    <div class="article-content">
+                        <span class="article-category">Conseils santé</span>
+                        <h3 class="article-card-title">Nutrition : les super-aliments essentiels</h3>
+                        <div class="article-info">
+                            <span>26 nov 2025</span>
+                            <span>5 min</span>
+                        </div>
+                        <p class="article-description">
+                            Une liste pratique d'ingrédients riches en nutriments.
+                        </p>
+                        <a href="https://sante.journaldesfemmes.fr/fiches-nutrition/2539618-super-aliments-sante-definition-liste-bienfaits-consommation/" class="article-btn">
+                            Lire l'article →
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION ARTICLES POPULAIRES -->
+    <section class="popular-section">
+        <div class="popular-container">
+            <div class="popular-card">
+                <h2 class="popular-title">Articles populaire</h2>
+
+                <div class="popular-list">
+                    <!-- Article 1 -->
+                    <div class="popular-item">
+                        <div class="popular-number">1</div>
+                        <div class="popular-content">
+                            <h3 class="popular-article-title">Créer son espace zen à la maison</h3>
+                            <div class="popular-meta">
+                                <span>15 nov 2024</span>
+                                <span>Astuces relaxation</span>
+                                <span>1,456 vues</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article 2 -->
+                    <div class="popular-item">
+                        <div class="popular-number">2</div>
+                        <div class="popular-content">
+                            <h3 class="popular-article-title">L'importance de l'hydratation pour le corps</h3>
+                            <div class="popular-meta">
+                                <span>12 nov 2024</span>
+                                <span>Conseils santé</span>
+                                <span>1,234 vues</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article 3 -->
+                    <div class="popular-item">
+                        <div class="popular-number">3</div>
+                        <div class="popular-content">
+                            <h3 class="popular-article-title">Témoignage : mon parcours de transformation</h3>
+                            <div class="popular-meta">
+                                <span>8 nov 2024</span>
+                                <span>Développement personnel</span>
+                                <span>1,103 vues</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bouton Voir plus -->
+            <div class="view-more-container">
+                <a href="https://www.medicalnewstoday.com/categories/health-well-being" class="view-more-btn">
+                    Voir 3 articles de plus ↓
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
