@@ -105,4 +105,13 @@ class Coach implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $data;
     }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // Ici on pourrait effacer les mots de passe temporaires si on en stockait
+        // Exemple: $this->plainPassword = null;
+    }
 }
