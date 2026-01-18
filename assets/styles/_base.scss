@@ -15,4 +15,151 @@ body {
   margin: 0 auto;
   padding: 0 2rem;
 }
+/* =========================
+   BASE STYLES
+========================= */
+@import 'variables';
+@import 'mixins';
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: #2c2623;
+    background-color: #fbf8f2;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+/* =========================
+   ACCESSIBILITÉ
+========================= */
+
+/* CONTRASTE ÉLEVÉ */
+body.high-contrast,
+html.high-contrast {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+body.high-contrast *,
+html.high-contrast * {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+body.high-contrast a,
+html.high-contrast a {
+    color: #ffff00 !important;
+    text-decoration: underline !important;
+}
+
+body.high-contrast button,
+html.high-contrast button {
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+body.high-contrast img,
+html.high-contrast img {
+    opacity: 1 !important;
+    filter: contrast(1.2) !important;
+}
+
+/* POLICE DYSLEXIQUE */
+body.dyslexic-font,
+body.dyslexic-font *,
+html.dyslexic-font,
+html.dyslexic-font * {
+    font-family: 'Comic Sans MS', 'OpenDyslexic', Arial, sans-serif !important;
+}
+
+/* TAILLE DE TEXTE - VERSION FONT-SIZE */
+html.text-size-110 {
+    font-size: 110% !important;
+}
+
+html.text-size-110 body,
+html.text-size-110 body * {
+    font-size: 110% !important;
+}
+
+html.text-size-120 {
+    font-size: 120% !important;
+}
+
+html.text-size-120 body,
+html.text-size-120 body * {
+    font-size: 120% !important;
+}
+
+html.text-size-130 {
+    font-size: 130% !important;
+}
+
+html.text-size-130 body,
+html.text-size-130 body * {
+    font-size: 130% !important;
+}
+
+html.text-size-140 {
+    font-size: 140% !important;
+}
+
+html.text-size-140 body,
+html.text-size-140 body * {
+    font-size: 140% !important;
+}
+
+html.text-size-150 {
+    font-size: 150% !important;
+}
+
+html.text-size-150 body,
+html.text-size-150 body * {
+    font-size: 150% !important;
+}
+.accessibility {
+    position: relative;
+}
+
+.accessibility-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.accessibility.active .accessibility-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
 

@@ -9,120 +9,53 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="page-reservation-confirmation">
-
-<!-- CONTAINER PRINCIPAL -->
 <div class="container">
-
-    <!-- PROGRESS BAR (LEFT SIDE) -->
     <div class="progress-bar">
-        <!-- IMAGE -->
         <div class="step completed">
             <img src="{{ asset('images/reservation.jpg') }}" alt="Illustration" class="side-image">
         </div>
-
-        <!-- BARRE VERTICALE AVEC ÉTAPES -->
         <div class="progress-bar-vertical">
-            <div class="step completed">
-                <div class="step-number">1</div>
-                <div class="step-label">Services</div>
-            </div>
-            <div class="step completed">
-                <div class="step-number">2</div>
-                <div class="step-label">Créneau</div>
-            </div>
-            <div class="step completed">
-                <div class="step-number">3</div>
-                <div class="step-label">Informations</div>
-            </div>
-            <div class="step active">
-                <div class="step-number">4</div>
-                <div class="step-label">Confirmation</div>
-            </div>
+            <div class="step completed"><div class="step-number">1</div><div class="step-label">Services</div></div>
+            <div class="step completed"><div class="step-number">2</div><div class="step-label">Créneau</div></div>
+            <div class="step completed"><div class="step-number">3</div><div class="step-label">Informations</div></div>
+            <div class="step active"><div class="step-number">4</div><div class="step-label">Confirmation</div></div>
         </div>
     </div>
-
-    <!-- LAYOUT 2 COLONNES -->
     <div class="confirmation-layout">
-
-        <!-- COLONNE GAUCHE -->
         <div class="confirmation-main">
-
-            <!-- Bannière succès -->
             <div class="success-banner">
-        <span>
-          Votre réservation est confirmée !<br>
-          Un mail de confirmation a été envoyé à
-          <strong>{{ booking.identity.email }}</strong>
-        </span>
+                <span>
+                    Votre réservation est confirmée !<br>
+                    Un mail de confirmation a été envoyé à
+                    <strong id="clientEmail"></strong>
+                </span>
             </div>
-
-            <!-- Détails séance -->
             <div class="info-section">
                 <h3>Détails de la séance</h3>
-                <ul>
-                    <li>Service : {{ booking.service }}</li>
-                    <li>Date : {{ booking.date|date('d/m/Y') }}</li>
-                    <li>Heure : {{ booking.time }}</li>
-                </ul>
+                <div id="sessionDetails"></div>
             </div>
-
-            <!-- Infos client -->
             <div class="info-section">
                 <h3>Vos informations</h3>
-                <ul>
-                    <li>Civilité : {{ booking.identity.civility }}</li>
-                    <li>Nom : {{ booking.identity.lastName }}</li>
-                    <li>Prénom : {{ booking.identity.firstName }}</li>
-                    <li>Date de naissance : {{ booking.identity.birthDate|date('d/m/Y') }}</li>
-                    <li>Email : {{ booking.identity.email }}</li>
-                    <li>Téléphone : {{ booking.identity.phone }}</li>
-                    <li>Adresse : {{ booking.address.street }}
-                        {% if booking.address.complement %}, {{ booking.address.complement }}{% endif %}
-                    </li>
-                    <li>Type de logement : {{ booking.address.housingType }}</li>
-                    {% if booking.address.floor is defined %}
-                        <li>Étage : {{ booking.address.floor }}</li>
-                    {% endif %}
-                    {% if booking.address.hasElevator %}
-                        <li>Ascenseur : Oui</li>
-                    {% endif %}
-                    {% if booking.address.accessInfo %}
-                        <li>Accès : {{ booking.address.accessInfo }}</li>
-                    {% endif %}
-                    <li>Parking : {{ booking.address.parking }}</li>
-                </ul>
+                <ul id="clientInfo"></ul>
             </div>
-
-            <!-- Récap financier -->
             <div class="info-section financial">
                 <h3>Récapitulatif financier</h3>
-                <ul>
-                    <li>Prix : {{ booking.price }} €</li>
-                    <li>Taxes : {{ booking.tax }} €</li>
-                    <li><strong>Total : {{ booking.total }} €</strong></li>
-                </ul>
+                <ul id="financialSummary"></ul>
             </div>
-
-            <!-- Boutons actions -->
             <div class="action-buttons">
                 <button id="downloadPdf" class="btn-secondary">Télécharger PDF</button>
                 <button id="addCalendar" class="btn-secondary">Ajouter au calendrier</button>
                 <button id="payNow" class="btn-primary">Payer maintenant</button>
             </div>
-
             <p class="important-note">
                 Cette réservation sera définitive après réception du paiement.
                 Vous recevrez un lien de paiement sécurisé dans les 30 minutes.
             </p>
 
         </div>
-
-        <!-- COLONNE DROITE -->
         <aside class="confirmation-sidebar">
-
             <h3 class="sidebar-title">À LIRE ATTENTIVEMENT</h3>
-
-            <div class="sidebar-section1">
+            <div class="sidebar-section">
                 <h4>Le jour de la séance :</h4>
                 <ul>
                     <li>Soyez prêt(e) 5 minutes avant</li>
@@ -130,8 +63,7 @@
                     <li>Séance adaptable en fonction de votre forme</li>
                 </ul>
             </div>
-
-            <div class="sidebar-section2">
+            <div class="sidebar-section">
                 <h4>Annulation :</h4>
                 <ul>
                     <li>Jusqu’à 24h avant : Remboursement</li>
@@ -139,17 +71,13 @@
                     <li>En cas d’urgence contactez-moi</li>
                 </ul>
             </div>
-
             <button class="btn-home-sidebar" onclick="window.location.href='{{ path('app_home') }}'">
                 Retour à l’accueil
             </button>
-
         </aside>
-
     </div>
-
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="{{ asset('js/confirmation.js') }}"></script>
 
 <footer class="footer">
@@ -161,7 +89,6 @@
                 Adresse mail : lyacoach@gmail.com
             </p>
         </div>
-
         <div>
             <h4>Réseaux Sociaux</h4>
             <p>
@@ -170,7 +97,6 @@
             </p>
         </div>
     </div>
-
     <div class="footer-bottom">
         <p>© 2024 Lya · Coach Bien-être · Tous droits réservés<br>
             Mentions légales · Politique de confidentialité

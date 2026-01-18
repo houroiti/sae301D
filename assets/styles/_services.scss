@@ -1,1087 +1,902 @@
 /* =========================
-   PAGE SERVICES - BANNIÈRE
+   PAGE SERVICES - RESPONSIVE OPTIMISÉ
+========================= */
+@import 'mixins';
+
+/* VARIABLES */
+$color-text: #3a332e;
+$color-light: #fbf7f2;
+$color-brown-medium: #7a6a60;
+$color-bg-light: #f5f0e8;
+
+/* =========================
+   BANNIÈRE SERVICES
 ========================= */
 
 .services-banner {
-  max-width: 1400px;
-  margin: 0 auto 80px;
-  padding: 0 80px;
+    max-width: 1400px;
+    margin: 0 auto 80px;
+    padding: 0 80px;
+
+    @media (max-width: 1200px) {
+        padding: 0 60px;
+        margin-bottom: 60px;
+    }
+
+    @media (max-width: 992px) {
+        padding: 0 40px;
+        margin-bottom: 50px;
+    }
+
+    @media (max-width: 768px) {
+        padding: 0 32px;
+        margin-bottom: 40px;
+    }
+
+    @media (max-width: 576px) {
+        padding: 0 24px;
+        margin-bottom: 32px;
+    }
+
+    @media (max-width: 480px) {
+        padding: 0 20px;
+        margin-bottom: 24px;
+    }
 }
 
 .services-banner-container {
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-  border-radius: 32px;
-  overflow: hidden;
-}
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 32px;
+    overflow: hidden;
 
-.services-banner-container img {
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-  display: block;
+    @media (max-width: 768px) {
+        border-radius: 28px;
+    }
+
+    @media (max-width: 576px) {
+        border-radius: 24px;
+    }
+
+    @media (max-width: 480px) {
+        border-radius: 20px;
+    }
+
+    img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        display: block;
+
+        @media (max-width: 992px) {
+            height: 300px;
+        }
+
+        @media (max-width: 768px) {
+            height: 250px;
+        }
+
+        @media (max-width: 576px) {
+            height: 220px;
+        }
+
+        @media (max-width: 480px) {
+            height: 200px;
+        }
+    }
 }
 
 /* TEXTE SUR L'IMAGE */
 .services-banner-text {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  text-align: center;
-}
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
 
-/* TITRE PRINCIPAL */
-.services-banner-text h1 {
-  font-family: 'GlamourLocale';
-  font-size: 80px;
-  font-weight: normal;
-  margin: 0 0 50px;
+    h1 {
+        font-family: 'GlamourLocale';
+        font-size: 80px;
+        font-weight: normal;
+        margin: 0 0 50px;
+        line-height: 1.1;
+        color: #fff;
+
+        @media (max-width: 1200px) {
+            font-size: 70px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 992px) {
+            font-size: 60px;
+            margin-bottom: 35px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 50px;
+            margin-bottom: 28px;
+        }
+
+        @media (max-width: 576px) {
+            font-size: 40px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+    }
 }
 
 /* SOUS-TITRES */
 .services-banner-links {
-  display: flex;
-  gap: 80px;
-  align-items: center;
+    display: flex;
+    gap: 80px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media (max-width: 992px) {
+        gap: 60px;
+    }
+
+    @media (max-width: 768px) {
+        gap: 40px;
+    }
+
+    @media (max-width: 576px) {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    a {
+        font-family: 'Times New Roman', Times, serif;
+        font-style: italic;
+        font-size: 38px;
+        font-weight: normal;
+        color: #fff;
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+
+        @media (max-width: 1200px) {
+            font-size: 34px;
+        }
+
+        @media (max-width: 992px) {
+            font-size: 30px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 26px;
+        }
+
+        @media (max-width: 576px) {
+            font-size: 22px;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 20px;
+        }
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
 }
 
-.services-banner-links a {
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic;
-  font-size: 38px;
-  font-weight: normal;
-  color: #fff;
-  text-decoration: none;
-  transition: opacity 0.3s ease;
-}
-
-.services-banner-links a:hover {
-  opacity: 0.7;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .services-banner {
-    padding: 0 60px;
-    margin-bottom: 70px;
-  }
-  
-  .services-banner-container img {
-    height: 380px;
-  }
-  
-  .services-banner-text h1 {
-    font-size: 70px;
-    margin-bottom: 45px;
-  }
-  
-  .services-banner-links {
-    gap: 70px;
-  }
-  
-  .services-banner-links a {
-    font-size: 34px;
-  }
-}
-
-@media (max-width: 768px) {
-  .services-banner {
-    padding: 0 40px;
-    margin-bottom: 60px;
-  }
-  
-  .services-banner-container img {
-    height: 350px;
-  }
-  
-  .services-banner-text h1 {
-    font-size: 60px;
-    margin-bottom: 40px;
-  }
-  
-  .services-banner-links {
-    gap: 50px;
-  }
-  
-  .services-banner-links a {
-    font-size: 30px;
-  }
-}
-
-@media (max-width: 600px) {
-  .services-banner {
-    padding: 0 24px;
-    margin-bottom: 50px;
-  }
-  
-  .services-banner-container {
-    border-radius: 24px;
-  }
-  
-  .services-banner-container img {
-    height: 300px;
-  }
-  
-  .services-banner-text h1 {
-    font-size: 48px;
-    margin-bottom: 30px;
-  }
-  
-  .services-banner-links {
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .services-banner-links a {
-    font-size: 26px;
-  }
-}
 /* =========================
-   YIN YOGA - SECTION
+   SECTIONS YIN YOGA / PILATES / FITNESS
 ========================= */
 
-.yin-yoga-section {
-  max-width: 1200px;
-  margin: 0 auto 80px;
-  padding: 0 80px;
-}
-
-.yin-yoga-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* TITRE DE SECTION */
-.yin-yoga-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.yin-yoga-header h2 {
-  font-family: 'GlamourLocale'; /* 🔥 Changé */
-  font-size: 70px;
-  font-weight: normal;
-  color: #3a332e;
-  margin-bottom: 12px;
-}
-
-.yin-yoga-header p {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  color: #3a332e;
-  margin: 0;
-}
-
-/* CARTES */
-.yin-yoga-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.yin-card {
-  background-color: #7a6a60;
-  border-radius: 40px;
-  padding: 50px;
-  color: #fbf7f2;
-}
-
-/* LAYOUT CARTE : IMAGE + HEADER EN HAUT */
-.yin-card-top {
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 50px;
-  align-items: start;
-  margin-bottom: 50px;
-}
-
-/* IMAGE */
-.yin-card-image {
-  width: 100%;
-  height: 320px;
-  border-radius: 28px;
-  overflow: hidden;
-}
-
-.yin-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* HEADER DE CARTE (À DROITE DE L'IMAGE) */
-.yin-card-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-}
-
-.yin-card-header h3 {
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic;
-  font-size: 42px;
-  font-weight: normal;
-  margin-bottom: 24px;
-  line-height: 1.2;
-}
-
-.yin-card-badges {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-
-.badge {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  background-color: transparent;
-  border: 1.5px solid #fbf7f2;
-  border-radius: 25px;
-  padding: 8px 20px;
-}
-
-.yin-card-description {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  opacity: 0.95;
-}
-
-/* SECTIONS BIENFAITS & SÉQUENCE EN BAS */
-.yin-card-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-}
-
-.yin-detail-section h4 {
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic;
-  font-size: 32px;
-  font-weight: normal;
-  margin-bottom: 20px;
-}
-
-.yin-detail-section ul {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  line-height: 1.9;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  opacity: 0.95;
-}
-
-.yin-detail-section ul li {
-  margin-bottom: 8px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .yin-yoga-section {
-    padding: 0 60px;
-    margin-bottom: 70px;
-  }
-  
-  .yin-yoga-header h2 {
-    font-size: 64px;
-  }
-  
-  .yin-card {
-    padding: 45px;
-  }
-  
-  .yin-card-top {
-    grid-template-columns: 380px 1fr;
-    gap: 45px;
-    margin-bottom: 45px;
-  }
-  
-  .yin-card-image {
-    height: 280px;
-  }
-  
-  .yin-card-header h3 {
-    font-size: 38px;
-  }
-  
-  .yin-card-details {
-    gap: 50px;
-  }
-}
-
-@media (max-width: 768px) {
-  .yin-yoga-section {
-    padding: 0 40px;
-    margin-bottom: 60px;
-  }
-  
-  .yin-yoga-header h2 {
-    font-size: 56px;
-  }
-  
-  .yin-card {
-    padding: 40px;
-    border-radius: 32px;
-  }
-  
-  .yin-card-top {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    margin-bottom: 35px;
-  }
-  
-  .yin-card-image {
-    height: 240px;
-  }
-  
-  .yin-card-header h3 {
-    font-size: 34px;
-    margin-bottom: 20px;
-  }
-  
-  .yin-card-badges {
-    margin-bottom: 24px;
-  }
-  
-  .yin-card-description {
-    font-size: 14px;
-  }
-  
-  .yin-card-details {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  
-  .yin-detail-section h4 {
-    font-size: 28px;
-  }
-}
-
-@media (max-width: 600px) {
-  .yin-yoga-section {
-    padding: 0 24px;
-    margin-bottom: 50px;
-  }
-  
-  .yin-yoga-header h2 {
-    font-size: 48px;
-  }
-  
-  .yin-card {
-    padding: 30px;
-    border-radius: 28px;
-  }
-  
-  .yin-card-top {
-    gap: 24px;
-    margin-bottom: 30px;
-  }
-  
-  .yin-card-image {
-    height: 200px;
-    border-radius: 20px;
-  }
-  
-  .yin-card-header h3 {
-    font-size: 30px;
-    margin-bottom: 16px;
-  }
-  
-  .yin-card-badges {
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .badge {
-    font-size: 12px;
-    padding: 6px 16px;
-  }
-  
-  .yin-card-description {
-    font-size: 13px;
-  }
-  
-  .yin-detail-section h4 {
-    font-size: 26px;
-    margin-bottom: 16px;
-  }
-  
-  .yin-detail-section ul {
-    font-size: 13px;
-  }
-}
-/* =========================
-   PILATES - SECTION
-========================= */
-
-.pilates-section {
-  max-width: 1200px;
-  margin: 0 auto 80px;
-  padding: 0 80px;
-}
-
-.pilates-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* TITRE DE SECTION */
-.pilates-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.pilates-header h2 {
-  font-family: 'GlamourLocale';
-  font-size: 70px;
-  font-weight: normal;
-  color: #3a332e;
-  margin-bottom: 12px;
-}
-
-.pilates-header p {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  color: #3a332e;
-  margin: 0;
-}
-
-/* CARTES */
-.pilates-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.pilates-card {
-  background-color: #7a6a60;
-  border-radius: 40px;
-  padding: 50px;
-  color: #fbf7f2;
-}
-
-/* LAYOUT CARTE : IMAGE + HEADER EN HAUT */
-.pilates-card-top {
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 50px;
-  align-items: start;
-  margin-bottom: 50px;
-}
-
-/* IMAGE */
-.pilates-card-image {
-  width: 100%;
-  height: 320px;
-  border-radius: 28px;
-  overflow: hidden;
-}
-
-.pilates-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* HEADER DE CARTE (À DROITE DE L'IMAGE) */
-.pilates-card-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-}
-
-.pilates-card-header h3 {
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic;
-  font-size: 42px;
-  font-weight: normal;
-  margin-bottom: 24px;
-  line-height: 1.2;
-}
-
-.pilates-card-badges {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-
-.badge {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  background-color: transparent;
-  border: 1.5px solid #fbf7f2;
-  border-radius: 25px;
-  padding: 8px 20px;
-}
-
-.pilates-card-description {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  opacity: 0.95;
-  margin-bottom: 16px;
-}
-
-.pilates-card-option {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  opacity: 0.9;
-}
-
-/* SECTIONS BIENFAITS & SÉQUENCE EN BAS */
-.pilates-card-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-}
-
-.pilates-detail-section h4 {
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic;
-  font-size: 32px;
-  font-weight: normal;
-  margin-bottom: 20px;
-}
-
-.pilates-detail-section ul {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  line-height: 1.9;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  opacity: 0.95;
-}
-
-.pilates-detail-section ul li {
-  margin-bottom: 8px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .pilates-section {
-    padding: 0 60px;
-    margin-bottom: 70px;
-  }
-  
-  .pilates-header h2 {
-    font-size: 64px;
-  }
-  
-  .pilates-card {
-    padding: 45px;
-  }
-  
-  .pilates-card-top {
-    grid-template-columns: 380px 1fr;
-    gap: 45px;
-    margin-bottom: 45px;
-  }
-  
-  .pilates-card-image {
-    height: 280px;
-  }
-  
-  .pilates-card-header h3 {
-    font-size: 38px;
-  }
-  
-  .pilates-card-details {
-    gap: 50px;
-  }
-}
-
-@media (max-width: 768px) {
-  .pilates-section {
-    padding: 0 40px;
-    margin-bottom: 60px;
-  }
-  
-  .pilates-header h2 {
-    font-size: 56px;
-  }
-  
-  .pilates-card {
-    padding: 40px;
-    border-radius: 32px;
-  }
-  
-  .pilates-card-top {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    margin-bottom: 35px;
-  }
-  
-  .pilates-card-image {
-    height: 240px;
-  }
-  
-  .pilates-card-header h3 {
-    font-size: 34px;
-    margin-bottom: 20px;
-  }
-  
-  .pilates-card-badges {
-    margin-bottom: 24px;
-  }
-  
-  .pilates-card-description {
-    font-size: 14px;
-  }
-  
-  .pilates-card-details {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  
-  .pilates-detail-section h4 {
-    font-size: 28px;
-  }
-}
-
-@media (max-width: 600px) {
-  .pilates-section {
-    padding: 0 24px;
-    margin-bottom: 50px;
-  }
-  
-  .pilates-header h2 {
-    font-size: 48px;
-  }
-  
-  .pilates-card {
-    padding: 30px;
-    border-radius: 28px;
-  }
-  
-  .pilates-card-top {
-    gap: 24px;
-    margin-bottom: 30px;
-  }
-  
-  .pilates-card-image {
-    height: 200px;
-    border-radius: 20px;
-  }
-  
-  .pilates-card-header h3 {
-    font-size: 30px;
-    margin-bottom: 16px;
-  }
-  
-  .pilates-card-badges {
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .badge {
-    font-size: 12px;
-    padding: 6px 16px;
-  }
-  
-  .pilates-card-description {
-    font-size: 13px;
-  }
-  
-  .pilates-card-option {
-    font-size: 13px;
-  }
-  
-  .pilates-detail-section h4 {
-    font-size: 26px;
-    margin-bottom: 16px;
-  }
-  
-  .pilates-detail-section ul {
-    font-size: 13px;
-  }
-}
-/* =========================
-   FITNESS - SECTION
-========================= */
-
+.yin-yoga-section,
+.pilates-section,
 .fitness-section {
-  max-width: 1200px;
-  margin: 0 auto 80px;
-  padding: 0 80px;
+    max-width: 1200px;
+    margin: 0 auto 80px;
+    padding: 0 80px;
+
+    @media (max-width: 1200px) {
+        padding: 0 60px;
+        margin-bottom: 60px;
+    }
+
+    @media (max-width: 992px) {
+        padding: 0 40px;
+        margin-bottom: 50px;
+    }
+
+    @media (max-width: 768px) {
+        padding: 0 32px;
+        margin-bottom: 40px;
+    }
+
+    @media (max-width: 576px) {
+        padding: 0 24px;
+        margin-bottom: 32px;
+    }
+
+    @media (max-width: 480px) {
+        padding: 0 20px;
+        margin-bottom: 24px;
+    }
 }
 
+.yin-yoga-container,
+.pilates-container,
 .fitness-container {
-  max-width: 1200px;
-  margin: 0 auto;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* TITRE DE SECTION */
+.yin-yoga-header,
+.pilates-header,
 .fitness-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
+    text-align: center;
+    margin-bottom: 60px;
 
-.fitness-header h2 {
-  font-family: 'GlamourLocale';
-  font-size: 70px;
-  font-weight: normal;
-  color: #3a332e;
-  margin-bottom: 12px;
-}
+    @media (max-width: 992px) {
+        margin-bottom: 50px;
+    }
 
-.fitness-header p {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  color: #3a332e;
-  margin: 0;
+    @media (max-width: 768px) {
+        margin-bottom: 40px;
+    }
+
+    @media (max-width: 576px) {
+        margin-bottom: 32px;
+    }
+
+    @media (max-width: 480px) {
+        margin-bottom: 24px;
+    }
+
+    h2 {
+        font-family: 'GlamourLocale';
+        font-size: 70px;
+        font-weight: normal;
+        color: $color-text;
+        margin-bottom: 12px;
+        line-height: 1.2;
+
+        @media (max-width: 1200px) {
+            font-size: 64px;
+        }
+
+        @media (max-width: 992px) {
+            font-size: 56px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 576px) {
+            font-size: 40px;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 34px;
+        }
+    }
+
+    p {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        color: $color-text;
+        margin: 0;
+
+        @media (max-width: 768px) {
+            font-size: 13px;
+        }
+
+        @media (max-width: 576px) {
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 11px;
+        }
+    }
 }
 
 /* CARTES */
+.yin-yoga-cards,
+.pilates-cards,
 .fitness-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @media (max-width: 992px) {
+        gap: 28px;
+    }
+
+    @media (max-width: 768px) {
+        gap: 20px;
+    }
+
+    @media (max-width: 576px) {
+        gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+        gap: 12px;
+    }
 }
 
+.yin-card,
+.pilates-card,
 .fitness-card {
-  background-color: #7a6a60;
-  border-radius: 40px;
-  padding: 50px;
-  color: #fbf7f2;
+    background-color: $color-brown-medium;
+    border-radius: 40px;
+    padding: 50px;
+    color: $color-light;
+
+    @media (max-width: 1200px) {
+        border-radius: 36px;
+        padding: 40px;
+    }
+
+    @media (max-width: 992px) {
+        border-radius: 30px;
+        padding: 28px;
+    }
+
+    @media (max-width: 768px) {
+        border-radius: 24px;
+        padding: 16px;
+    }
+
+    @media (max-width: 576px) {
+        border-radius: 20px;
+        padding: 12px;
+    }
+
+    @media (max-width: 480px) {
+        border-radius: 16px;
+        padding: 10px;
+    }
 }
 
 /* LAYOUT CARTE : IMAGE + HEADER EN HAUT */
+.yin-card-top,
+.pilates-card-top,
 .fitness-card-top {
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 50px;
-  align-items: start;
-  margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 50px;
+    align-items: start;
+    margin-bottom: 50px;
+
+    @media (max-width: 1200px) {
+        grid-template-columns: 380px 1fr;
+        gap: 40px;
+        margin-bottom: 40px;
+    }
+
+    @media (max-width: 992px) {
+        grid-template-columns: 340px 1fr;
+        gap: 32px;
+        margin-bottom: 32px;
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 576px) {
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    @media (max-width: 480px) {
+        gap: 10px;
+        margin-bottom: 12px;
+    }
 }
 
 /* IMAGE */
+.yin-card-image,
+.pilates-card-image,
 .fitness-card-image {
-  width: 100%;
-  height: 320px;
-  border-radius: 28px;
-  overflow: hidden;
+    width: 100%;
+    height: 320px;
+    border-radius: 28px;
+    overflow: hidden;
+
+    @media (max-width: 1200px) {
+        height: 300px;
+        border-radius: 24px;
+    }
+
+    @media (max-width: 992px) {
+        height: 260px;
+        border-radius: 20px;
+    }
+
+    @media (max-width: 768px) {
+        height: 200px;
+        border-radius: 18px;
+    }
+
+    @media (max-width: 576px) {
+        height: 160px;
+        border-radius: 16px;
+    }
+
+    @media (max-width: 480px) {
+        height: 140px;
+        border-radius: 14px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
 }
 
-.fitness-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* HEADER DE CARTE (À DROITE DE L'IMAGE) */
+/* HEADER DE CARTE */
+.yin-card-header,
+.pilates-card-header,
 .fitness-card-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    @media (max-width: 768px) {
+        height: auto;
+    }
+
+    h3 {
+        font-family: 'Times New Roman', Times, serif;
+        font-style: italic;
+        font-size: 42px;
+        font-weight: normal;
+        margin-bottom: 24px;
+        line-height: 1.2;
+
+        @media (max-width: 1200px) {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 992px) {
+            font-size: 30px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 576px) {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+    }
 }
 
-.fitness-card-header h3 {
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic;
-  font-size: 42px;
-  font-weight: normal;
-  margin-bottom: 24px;
-  line-height: 1.2;
-}
-
+/* BADGES */
+.yin-card-badges,
+.pilates-card-badges,
 .fitness-card-badges {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+
+    @media (max-width: 992px) {
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+        gap: 8px;
+        margin-bottom: 14px;
+    }
+
+    @media (max-width: 576px) {
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+
+    @media (max-width: 480px) {
+        gap: 5px;
+        margin-bottom: 8px;
+    }
 }
 
 .badge {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  background-color: transparent;
-  border: 1.5px solid #fbf7f2;
-  border-radius: 25px;
-  padding: 8px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: transparent;
+    border: 1.5px solid $color-light;
+    border-radius: 25px;
+    padding: 8px 20px;
+
+    @media (max-width: 992px) {
+        font-size: 12px;
+        padding: 6px 16px;
+        border-radius: 20px;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 10px;
+        padding: 5px 12px;
+        border-radius: 16px;
+    }
+
+    @media (max-width: 576px) {
+        font-size: 9px;
+        padding: 4px 10px;
+        border-radius: 14px;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 8px;
+        padding: 3px 8px;
+        border-radius: 12px;
+    }
 }
 
+/* DESCRIPTION */
+.yin-card-description,
+.pilates-card-description,
 .fitness-card-description {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  opacity: 0.95;
-  margin-bottom: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    opacity: 0.95;
+    margin-bottom: 16px;
+
+    @media (max-width: 992px) {
+        font-size: 13px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 11px;
+        margin-bottom: 10px;
+    }
+
+    @media (max-width: 576px) {
+        font-size: 10px;
+        line-height: 1.3;
+        margin-bottom: 8px;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 9px;
+        margin-bottom: 6px;
+    }
 }
 
+.pilates-card-option,
 .fitness-card-option {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  opacity: 0.9;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.9;
+
+    @media (max-width: 992px) {
+        font-size: 12px;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 10px;
+    }
+
+    @media (max-width: 576px) {
+        font-size: 9px;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 8px;
+    }
 }
 
 /* SECTIONS BIENFAITS & SÉQUENCE EN BAS */
+.yin-card-details,
+.pilates-card-details,
 .fitness-card-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+
+    @media (max-width: 1200px) {
+        gap: 40px;
+    }
+
+    @media (max-width: 992px) {
+        gap: 32px;
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    @media (max-width: 576px) {
+        gap: 10px;
+    }
+
+    @media (max-width: 480px) {
+        gap: 8px;
+    }
 }
 
-.fitness-detail-section h4 {
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic;
-  font-size: 32px;
-  font-weight: normal;
-  margin-bottom: 20px;
+.yin-detail-section,
+.pilates-detail-section,
+.fitness-detail-section {
+    h4 {
+        font-family: 'Times New Roman', Times, serif;
+        font-style: italic;
+        font-size: 32px;
+        font-weight: normal;
+        margin-bottom: 20px;
+        line-height: 1.1;
+
+        @media (max-width: 1200px) {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 992px) {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 576px) {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+    }
+
+    ul {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        opacity: 0.95;
+
+        @media (max-width: 992px) {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 11px;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 576px) {
+            font-size: 10px;
+            line-height: 1.25;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 9px;
+            line-height: 1.2;
+        }
+
+        li {
+            margin-bottom: 8px;
+
+            @media (max-width: 768px) {
+                margin-bottom: 4px;
+            }
+
+            @media (max-width: 576px) {
+                margin-bottom: 3px;
+            }
+
+            @media (max-width: 480px) {
+                margin-bottom: 2px;
+            }
+        }
+    }
 }
 
-.fitness-detail-section ul {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  line-height: 1.9;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  opacity: 0.95;
-}
+/* =========================
+   INFORMATIONS FITNESS
+========================= */
 
-.fitness-detail-section ul li {
-  margin-bottom: 8px;
-}
-
-/* INFORMATIONS IMPORTANTES */
 .fitness-info-box {
-  background-color: #f5f0e8;
-  border-left: 4px solid #7a6a60;
-  border-radius: 12px;
-  padding: 40px 50px;
-  margin-top: 60px;
-}
+    background-color: $color-bg-light;
+    border-left: 4px solid $color-brown-medium;
+    border-radius: 12px;
+    padding: 40px 50px;
+    margin-top: 60px;
 
-.fitness-info-box h3 {
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic;
-  font-size: 36px;
-  color: #3a332e;
-  margin-bottom: 30px;
+    @media (max-width: 1200px) {
+        padding: 36px 45px;
+        margin-top: 50px;
+    }
+
+    @media (max-width: 992px) {
+        padding: 32px 40px;
+        margin-top: 45px;
+    }
+
+    @media (max-width: 768px) {
+        padding: 28px 32px;
+        margin-top: 40px;
+        border-radius: 10px;
+    }
+
+    @media (max-width: 576px) {
+        padding: 24px 24px;
+        margin-top: 32px;
+    }
+
+    @media (max-width: 480px) {
+        padding: 20px 20px;
+        margin-top: 24px;
+        border-radius: 8px;
+    }
+
+    h3 {
+        font-family: 'Times New Roman', Times, serif;
+        font-style: italic;
+        font-size: 36px;
+        color: $color-text;
+        margin-bottom: 30px;
+        line-height: 1.2;
+
+        @media (max-width: 1200px) {
+            font-size: 32px;
+            margin-bottom: 26px;
+        }
+
+        @media (max-width: 992px) {
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 576px) {
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 20px;
+            margin-bottom: 14px;
+        }
+    }
 }
 
 .info-section {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  color: #3a332e;
-  margin-bottom: 24px;
-  line-height: 1.7;
-}
-
-.info-section:last-child {
-  margin-bottom: 0;
-}
-
-.info-section strong {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.info-section ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.info-section ul li {
-  margin-bottom: 6px;
-  padding-left: 0;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .fitness-section {
-    padding: 0 60px;
-    margin-bottom: 70px;
-  }
-  
-  .fitness-header h2 {
-    font-size: 64px;
-  }
-  
-  .fitness-card {
-    padding: 45px;
-  }
-  
-  .fitness-card-top {
-    grid-template-columns: 380px 1fr;
-    gap: 45px;
-    margin-bottom: 45px;
-  }
-  
-  .fitness-card-image {
-    height: 280px;
-  }
-  
-  .fitness-card-header h3 {
-    font-size: 38px;
-  }
-  
-  .fitness-card-details {
-    gap: 50px;
-  }
-  
-  .fitness-info-box {
-    padding: 35px 40px;
-  }
-  
-  .fitness-info-box h3 {
-    font-size: 32px;
-  }
-}
-
-@media (max-width: 768px) {
-  .fitness-section {
-    padding: 0 40px;
-    margin-bottom: 60px;
-  }
-  
-  .fitness-header h2 {
-    font-size: 56px;
-  }
-  
-  .fitness-card {
-    padding: 40px;
-    border-radius: 32px;
-  }
-  
-  .fitness-card-top {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    margin-bottom: 35px;
-  }
-  
-  .fitness-card-image {
-    height: 240px;
-  }
-  
-  .fitness-card-header h3 {
-    font-size: 34px;
-    margin-bottom: 20px;
-  }
-  
-  .fitness-card-badges {
-    margin-bottom: 24px;
-  }
-  
-  .fitness-card-description {
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-  }
-  
-  .fitness-card-details {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  
-  .fitness-detail-section h4 {
-    font-size: 28px;
-  }
-  
-  .fitness-info-box {
-    padding: 30px 35px;
-    margin-top: 50px;
-  }
-  
-  .fitness-info-box h3 {
-    font-size: 28px;
+    color: $color-text;
     margin-bottom: 24px;
-  }
-}
+    line-height: 1.6;
 
-@media (max-width: 600px) {
-  .fitness-section {
-    padding: 0 24px;
-    margin-bottom: 50px;
-  }
-  
-  .fitness-header h2 {
-    font-size: 48px;
-  }
-  
-  .fitness-card {
-    padding: 30px;
-    border-radius: 28px;
-  }
-  
-  .fitness-card-top {
-    gap: 24px;
-    margin-bottom: 30px;
-  }
-  
-  .fitness-card-image {
-    height: 200px;
-    border-radius: 20px;
-  }
-  
-  .fitness-card-header h3 {
-    font-size: 30px;
-    margin-bottom: 16px;
-  }
-  
-  .fitness-card-badges {
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .badge {
-    font-size: 12px;
-    padding: 6px 16px;
-  }
-  
-  .fitness-card-description {
-    font-size: 13px;
-  }
-  
-  .fitness-card-option {
-    font-size: 13px;
-  }
-  
-  .fitness-detail-section h4 {
-    font-size: 26px;
-    margin-bottom: 16px;
-  }
-  
-  .fitness-detail-section ul {
-    font-size: 13px;
-  }
-  
-  .fitness-info-box {
-    padding: 24px 28px;
-    margin-top: 40px;
-  }
-  
-  .fitness-info-box h3 {
-    font-size: 26px;
-    margin-bottom: 20px;
-  }
-  
-  .info-section {
-    font-size: 13px;
-    margin-bottom: 20px;
-  }
+    @media (max-width: 992px) {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 12px;
+        margin-bottom: 18px;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 576px) {
+        font-size: 11px;
+        margin-bottom: 16px;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 10px;
+        margin-bottom: 14px;
+        line-height: 1.4;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    strong {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+
+        @media (max-width: 768px) {
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 480px) {
+            margin-bottom: 5px;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            margin-bottom: 6px;
+            padding-left: 0;
+
+            @media (max-width: 768px) {
+                margin-bottom: 5px;
+            }
+
+            @media (max-width: 480px) {
+                margin-bottom: 4px;
+            }
+        }
+    }
+}
+.services-banner-links a {
+    border: 2px solid #fff !important;
+    border-radius: 50px !important;
+    padding: 8px 24px !important;
+    display: inline-block !important;
+    transition: all 0.3s ease !important;
+
+    @media (max-width: 992px) {
+        padding: 6px 20px !important;
+    }
+
+    @media (max-width: 768px) {
+        padding: 5px 16px !important;
+    }
+
+    @media (max-width: 576px) {
+        padding: 4px 14px !important;
+    }
+
+    @media (max-width: 480px) {
+        padding: 3px 12px !important;
+    }
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+    }
 }

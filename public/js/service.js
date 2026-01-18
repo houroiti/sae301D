@@ -43,9 +43,25 @@ let bookingData = {
     options: [],
     frequency: 'unique'
 };
+/* =========================
+   LOCAL STORAGE
+========================= */
+function loadBookingData() {
+    try {
+        const saved = localStorage.getItem('bookingData');
+        if (saved) bookingData = JSON.parse(saved);
+    } catch {
+        localStorage.removeItem('bookingData');
+    }
+}
 
+
+function saveBookingData() {
+    localStorage.setItem('bookingData', JSON.stringify(bookingData));
+}
 // Initialisation
 document.addEventListener('DOMContentLoaded', function() {
+    loadBookingData();
     renderDisciplines();
     updateSummary();
     setupEventListeners();
@@ -73,7 +89,7 @@ function selectDiscipline(disciplineId) {
     bookingData.discipline = disciplineId;
     bookingData.sessionType = '';
     bookingData.options = [];
-
+    saveBookingData();
     renderDisciplines();
     renderSessions();
     renderOptions();
@@ -117,6 +133,7 @@ function renderSessions() {
 // Sélection d'une session
 function selectSession(sessionId) {
     bookingData.sessionType = sessionId;
+    saveBookingData();
     renderSessions();
     renderOptions();
     updateSummary();
@@ -167,6 +184,7 @@ function toggleOption(optionId, isChecked) {
     } else {
         bookingData.options = bookingData.options.filter(id => id !== optionId);
     }
+    saveBookingData();
     renderOptions();
     updateSummary();
 }
@@ -194,15 +212,9 @@ function updateSummary() {
                 return;
             }
 
-            // Envoi au serveur Symfony (optionnel si tu veux sauvegarder)
-            fetch('/save-booking', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(bookingData)
-            }).finally(() => {
-                // Redirection vers la page créneaux
-                window.location.href = routeCreneaux;
-            });
+            saveBookingData();
+            window.location.href = routeCreneaux;
+
         }
     }
 
@@ -229,7 +241,7 @@ function getSessionInfo() {
     return disc ? disc.sessions.find(s => s.id === bookingData.sessionType) : null;
 }
 
-// Gestion d'autres événements si nécessaire
+// Gestions d'autres événements si nécessaire
 function setupEventListeners() {
-    // Ici tu peux gérer fréquence ou autres interactions
+
 }

@@ -1,16 +1,106 @@
-
 {% extends 'base.html.twig' %}
 
+{% block title %}Back-office Coach{% endblock %}
+
 {% block body %}
-    <h1>Back-office Coach</h1>
+    <div class="planning-layout">
+        <div class="planning-left">
+            <h1>Planning du coach</h1>
 
-    <p>Bienvenue {{ app.user.email }}</p>
+            <div class="planning-container">
+                <table id="planningTable">
+                    <thead>
+                    <tr>
+                        <th>Heure</th>
+                        <th>Lundi</th>
+                        <th>Mardi</th>
+                        <th>Mercredi</th>
+                        <th>Jeudi</th>
+                        <th>Vendredi</th>
+                        <th>Samedi</th>
+                        <th>Dimanche</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <aside class="planning-right">
+            <h2>Ajouter une indisponibilité</h2>
+            <form id="indispoForm">
+                <label>
+                    Date
+                    <input type="date" id="indispoDate" required
+                           min="{{ 'now'|date_modify('+1 day')|date('Y-m-d') }}">
+                </label>
+                <div class="time-row">
+                    <label>
+                        Début
+                        <select id="indispoStart" required>
+                            <option value="">--</option>
+                        </select>
+                    </label>
+                    <label>
+                        Fin
+                        <select id="indispoEnd" required>
+                            <option value="">--</option>
+                        </select>
+                    </label>
+                </div>
+                <label>
+                    Motif
+                    <input type="text" id="indispoReason">
+                </label>
 
-    <ul>
-        <li><a href="#">📅 Planning</a></li>
-        <li><a href="#">🚫 Indisponibilités</a></li>
-        <li><a href="#">🗺 Carte interactive</a></li>
-        <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
-    </ul>
+                <button type="submit">Ajouter</button>
+            </form>
+        </aside>
+    </div>
+    <h2>Liste des réservations</h2>
+    <div id="reservationsList"></div>
+
+    <h2>Carte des clients</h2>
+    <div id="map"
+         style="width:80%;max-width:900px;height:400px;margin:0 auto 120px;
+                border-radius:14px;box-shadow:0 4px 10px rgba(0,0,0,.1);">
+    </div>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <script>
+        window.reservations = {{ reservations|json_encode|raw }};
+    </script>
+    <script>
+        window.reservations = [
+            {% for r in reservations %}
+            {
+                client: "{{ r.client|e('js') }}", // pour carte et popup
+                identity: {
+                    firstName: "{{ r.client.firstName|default('')|e('js') }}",
+                    lastName: "{{ r.client.lastName|default('')|e('js') }}"
+                },
+                date: "{{ r.date|date('Y-m-d') }}",
+                start: "{{ r.start|date('H:i') }}",
+                end: "{{ r.end|date('H:i') }}",
+                address: {
+                    full: "{{ r.address.full|e('js') }}",
+                    city: "{{ r.address.city|e('js') }}"
+                },
+                lat: {{ r.lat is defined and r.lat is not null ? r.lat : 'null' }},
+                lng: {{ r.lng is defined and r.lng is not null ? r.lng : 'null' }}
+            }{{ not loop.last ? ',' : '' }}
+            {% endfor %}
+        ];
+    </script>
+
+
+    <script>
+        window.indisponibilites = {{ indisponibilites|json_encode|raw }};
+    </script>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="{{ asset('js/map.js') }}"></script>
+    <script src="{{ asset('js/backoffice-planning.js') }}"></script>
+
+
+
+
 {% endblock %}
-

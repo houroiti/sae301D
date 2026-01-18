@@ -1,63 +1,58 @@
 {% extends 'base.html.twig' %}
 {% set current_page = 'home' %}
 {% block title %}Zenlya - Accueil{% endblock %}
-
 {% block body %}
-
-    <!-- ========================= HERO ========================= -->
     <section class="hero">
         <div class="hero-container">
             <img src="{{ asset('images/lya_hero_img.jpg') }}" alt="Lya coach">
-
             <div class="hero-text">
                 <h1>
                     <span class="lya">Lya</span>
                     <span class="coach">coach</span>
                 </h1>
-
                 <p>
                     Passionnée par le sport <br>
                     et le bien-être depuis toujours,<br>
                     j'ai fait de ma passion mon métier.
                 </p>
+                <p>
+                    <a href="{{ path('app_about') }}" class="btn-outline">
+                        En savoir +
+                    </a>
+                </p>
 
-                <p><a href="#" class="btn-outline">En savoir +</a></p>
-                <p><a href="#" class="btn-outline">Réserver maintenant</a></p>
+                <p>
+                    <a href="{{ path('app_reservation') }}" class="btn-outline">
+                        Réserver maintenant
+                    </a>
+                </p>
+
             </div>
         </div>
     </section>
-
-    <!-- ========================= WELCOME ========================= -->
     <section class="welcome">
         <div class="container">
             <img src="{{ asset('images/lya.jpg') }}" alt="Lya séance">
 
             <div class="welcome-text">
                 <h2>Bienvenue</h2>
-
                 <p>
                     Coach certifiée avec 8 ans d'expérience, je vous accompagne à domicile
                     pour des séances 100% personnalisées. Ma méthode unique allie
                     performance et bien-être pour des résultats durables.
                     Découvrez le sport adapté à VOS objectifs.
                 </p>
-
-                <a href="#" class="btn-dark">En savoir + sur moi</a>
+                <a href="{{ path('app_about') }}" class="btn-dark">En savoir + sur moi</a>
             </div>
         </div>
     </section>
-
-    <!-- ========================= SERVICES ========================= -->
     <section class="services">
         <div class="services-container">
-
             <h2 class="services-title">
                 <span>Mes services</span><br>
             </h2>
-
             <div class="services-block">
                 <div class="services-grid">
-
                     <div class="service text">
                         <h3>Yin Yoga</h3>
                         <p>
@@ -66,13 +61,11 @@
                             sont tenues plusieurs minutes pour relâcher les tensions
                             profondes, améliorer la flexibilité et calmer le système nerveux.
                         </p>
-                        <a href="#">En savoir +</a>
+                        <a href="{{ path('app_services') }}">En savoir +</a>
                     </div>
-
                     <div class="service image">
                         <img src="{{ asset('images/fitness.jpg') }}" alt="">
                     </div>
-
                     <div class="service text">
                         <h3>Pilates</h3>
                         <p>
@@ -81,13 +74,11 @@
                             dorsales et sculpte le corps en profondeur sans impact
                             sur les articulations.
                         </p>
-                        <a href="#">En savoir +</a>
+                        <a href="{{ path('app_services') }}">En savoir +</a>
                     </div>
-
                     <div class="service image">
                         <img src="{{ asset('images/yoga.jpg') }}" alt="">
                     </div>
-
                     <div class="service text">
                         <h3>Fitness</h3>
                         <p>
@@ -95,27 +86,19 @@
                             adaptées à votre niveau. Du HIIT au circuit training,
                             retrouvez la forme, l’endurance et la force dans la bonne humeur.
                         </p>
-                        <a href="#">En savoir +</a>
+                        <a href="{{ path('app_services') }}">En savoir +</a>
                     </div>
-
                     <div class="service image">
                         <img src="{{ asset('images/pilates.jpg') }}" alt="">
                     </div>
-
                 </div>
             </div>
-
         </div>
     </section>
-
-    <!-- ========================= POURQUOI ME CHOISIR ========================= -->
     <section class="why">
         <h2 class="why-title">Pourquoi me choisir</h2>
-
         <div class="carousel">
-            <button class="arrow left">&#10094;</button>
             <div class="carousel-track">
-
                 <div class="slide active">
                     <img src="{{ asset('images/pilates1.jpeg') }}" alt="">
                     <div class="slide-text">
@@ -128,7 +111,6 @@
                         </p>
                     </div>
                 </div>
-
                 <div class="slide">
                     <img src="{{ asset('images/pkmechoisir_suivi_personnalise.png') }}" alt="">
                     <div class="slide-text">
@@ -141,7 +123,6 @@
                         </p>
                     </div>
                 </div>
-
                 <div class="slide">
                     <img src="{{ asset('images/resultats_garantis.jpg') }}" alt="">
                     <div class="slide-text">
@@ -155,31 +136,22 @@
                 </div>
 
             </div>
-            <button class="arrow right">&#10095;</button>
         </div>
-
         <div class="dots">
             <span class="dot active"></span>
             <span class="dot"></span>
             <span class="dot"></span>
         </div>
     </section>
-
-    <!-- ========================= TÉMOIGNAGES ========================= -->
     <section class="testimonials">
         <h2 class="testimonials-title">Les Avis</h2>
-
         <div class="testimonials-carousel">
-
             <button class="arrow-testi left">&#10094;</button>
-
             <div class="testimonials-container">
-
                 <div class="testimonial-card active">
                     <div class="testimonial-image">
                         <img src="{{ asset('images/avis.jpg') }}" alt="Témoignage">
                     </div>
-
                     <div class="testimonial-text">
                         <h3>Témoignage d'Ife</h3>
                         <p>
@@ -192,12 +164,10 @@
                         Je la recommande à 1000% !"</p>
                     </div>
                 </div>
-
                 <div class="testimonial-card">
                     <div class="testimonial-image">
                         <img src="{{ asset('images/temoignage.jpg') }}" alt="Témoignage">
                     </div>
-
                     <div class="testimonial-text">
                         <h3>Témoignage de Sarah</h3>
                         <p>
@@ -210,18 +180,13 @@
                 </div>
 
             </div>
-
             <button class="arrow-testi right">&#10095;</button>
-
         </div>
-
         <div class="dots-testi">
             <span class="dot-testi active"></span>
             <span class="dot-testi"></span>
         </div>
     </section>
-
-    <!-- ========================= FOOTER ========================= -->
     <footer class="footer">
         <div class="footer-container">
             <div>
@@ -231,7 +196,6 @@
                     Adresse mail : lyacoach@gmail.com
                 </p>
             </div>
-
             <div>
                 <h4>Réseaux Sociaux</h4>
                 <p>
@@ -240,20 +204,48 @@
                 </p>
             </div>
         </div>
-
         <div class="footer-bottom">
             <p>
                 © 2024 Lya · Coach Bien-être · Tous droits réservés<br>
                 Mentions légales · Politique de confidentialité
             </p>
-
             <div class="footer-logo">
                 <img src="{{ asset('images/logo2.svg') }}" alt="Zenlya">
             </div>
         </div>
     </footer>
+    <script>
+        // CARROUSEL TÉMOIGNAGES
+        const testimonialSlides = document.querySelectorAll('.testimonial-card');
+        const testimonialDots = document.querySelectorAll('.dot-testi');
+        const prevTesti = document.querySelector('.arrow-testi.left');
+        const nextTesti = document.querySelector('.arrow-testi.right');
 
-    <!-- ========================= JS ========================= -->
+        let testimonialIndex = 0;
+
+        function updateTestimonials() {
+            testimonialSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === testimonialIndex);
+                testimonialDots[i].classList.toggle('active', i === testimonialIndex);
+            });
+        }
+
+        nextTesti.addEventListener('click', () => {
+            testimonialIndex = (testimonialIndex + 1) % testimonialSlides.length;
+            updateTestimonials();
+        });
+
+        prevTesti.addEventListener('click', () => {
+            testimonialIndex = (testimonialIndex - 1 + testimonialSlides.length) % testimonialSlides.length;
+            updateTestimonials();
+        });
+
+        testimonialDots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                testimonialIndex = i;
+                updateTestimonials();
+            });
+        });
+    </script>
     <script src="{{ asset('js/accueil.js') }}"></script>
-
 {% endblock %}

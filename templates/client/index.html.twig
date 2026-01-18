@@ -6,6 +6,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 </head>
 <body>
 <div class="container">
@@ -39,30 +40,13 @@
             </div>
         </div>
     </div>
-
     <div class="content-wrapper">
         <div class="main-content">
             <div class="card">
                 <h2 class="title">Informations personnelles</h2>
                 <p class="subtitle">Complétez vos informations pour finaliser la réservation</p>
 
-                <!-- Progress Indicator -->
-                <div class="form-progress">
-                    <div class="form-step">
-                        <div class="step-icon active">❶</div>
-                        <div class="step-label">Identité</div>
-                    </div>
-                    <div class="form-step">
-                        <div class="step-icon">❷</div>
-                        <div class="step-label">Adresse</div>
-                    </div>
-                    <div class="form-step">
-                        <div class="step-icon">❸</div>
-                        <div class="step-label">Santé</div>
-                    </div>
-                </div>
 
-                <!-- Section 1: Identity -->
                 <div class="form-section" id="identitySection">
                     <h3 class="section-title">Identité (obligatoire)</h3>
                     <div class="form-grid">
@@ -103,16 +87,22 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Section 2: Address -->
                 <div class="form-section" id="addressSection">
                     <h3 class="section-title">Adresse & accès (obligatoire)</h3>
                     <div class="form-stack">
                         <div class="form-group">
-                            <label class="form-label">Adresse complète *</label>
-                            <input type="text" id="street" class="form-input" placeholder="15 Rue de la Paix, 75002 Paris">
-                            <div class="error-message" id="streetError"></div>
+                            <label class="form-label">Adresse complète (pour la carte) *</label>
+                            <input type="text" id="mapAddress" class="form-input" placeholder="15 Rue de la Paix, Troyes" required>
+                            <div class="error-message" id="mapAddressError"></div>
                         </div>
+                        <div class="form-group">
+                            <label class="form-label">Ville *</label>
+                            <input type="text" id="city" class="form-input" placeholder="Exemple : Lyon" required>
+                            <div class="error-message" id="cityError"></div>
+                        </div>
+
+
+
                         <div class="form-group">
                             <label class="form-label">Complément d'adresse</label>
                             <input type="text" id="complement" class="form-input" placeholder="Appartement, étage, digicode...">
@@ -155,8 +145,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Section 3: Health -->
                 <div class="form-section health-section" id="healthSection">
                     <h3 class="section-title">Santé & préférences (recommandé)</h3>
                     <div class="form-stack">
@@ -177,7 +165,6 @@
                                 </label>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label class="form-label">Objectifs principaux</label>
                             <div class="checkbox-grid">
@@ -203,7 +190,6 @@
                                 </label>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label class="form-label">Blessures ou limitations</label>
                             <textarea id="injuries" class="form-textarea" rows="2" placeholder="Problèmes de dos, genoux, épaules..."></textarea>
@@ -211,8 +197,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Section 4: Consents -->
                 <div class="form-section" id="consentsSection">
                     <h3 class="section-title">Consentements (obligatoire)</h3>
                     <div class="consents-list">
@@ -227,12 +211,11 @@
                     </div>
                     <div class="error-message" id="consentsError"></div>
                 </div>
-
-                <!-- Navigation Buttons -->
                 <div class="navigation-buttons">
                     <a class="btn-back" href="{{ path('app_creneaux') }}">
                         <i class="fas fa-chevron-left"></i> Retour au calendrier
                     </a>
+                    <div id="formAlert" style="color: red; margin-bottom: 10px; display: none;"></div>
                     <button class="btn-next" id="nextButton" data-confirmation-url="{{ path('app_confirmation') }}" disabled>
                         Valider ma réservation <i class="fas fa-check"></i>
                     </button>
@@ -242,9 +225,7 @@
         </div>
     </div>
 </div>
-
 <script src="{{ asset('js/client.js') }}"></script>
-
 <footer class="footer">
     <div class="footer-container">
         <div>
@@ -254,7 +235,6 @@
                 Adresse mail : lyacoach@gmail.com
             </p>
         </div>
-
         <div>
             <h4>Réseaux Sociaux</h4>
             <p>
@@ -263,7 +243,6 @@
             </p>
         </div>
     </div>
-
     <div class="footer-bottom">
         <p>© 2024 Lya · Coach Bien-être · Tous droits réservés<br>
             Mentions légales · Politique de confidentialité

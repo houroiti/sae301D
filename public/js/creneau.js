@@ -1,170 +1,156 @@
-// Données de configuration
-const availableSlots = ['08:00', '09:15', '10:30', '14:00', '15:30', '17:00', '18:30'];
+// ===================== DONNÉES DE CONFIGURATION =====================
+window.reservedSlots = Array.isArray(window.reservedSlots) ? window.reservedSlots : [];
+async function fetchReservedSlots(date) {
+    if (!date) return [];
+    try {
+        const res = await fetch(`/reservation/list?date=${date}`);
+        const data = await res.json();
+        if (data.success && Array.isArray(data.reservedSlots)) {
+            window.reservedSlots = data.reservedSlots.map(s => ({
+                start: s.start,
+                end: s.end
+            }));
+        } else {
+            window.reservedSlots = [];
+        }
+    } catch (err) {
+        console.error('Erreur récupération créneaux réservés:', err);
+        window.reservedSlots = [];
+    }
+}
+
 const disciplines = {
     'yin-yoga': {
         name: 'Yin Yoga',
         sessions: [
             { id: 'decouverte', name: 'Séance découverte', duration: 60, price: 50 },
             { id: 'flexibilite', name: 'Yin Yoga flexibilité', duration: 75, price: 60 },
-            { id: 'sommeil', name: 'Yin Yoga sommeil', duration: 90, price: 70 }
+            { id: 'sommeil', name: 'Yin Yoga sommeil', duration: 90, price: 75 }
         ]
     },
     'pilates': {
         name: 'Pilates',
         sessions: [
-            { id: 'fondamental', name: 'Pilates fondamental', duration: 55, price: 45 },
-            { id: 'avance', name: 'Pilates avancé', duration: 70, price: 55 },
-            { id: 'prenatal', name: 'Pilates prénatal', duration: 60, price: 50 }
+            { id: 'fondamental', name: 'Pilates fondamental', duration: 55, price: 55 },
+            { id: 'avance', name: 'Pilates avancé', duration: 70, price: 70 },
+            { id: 'prenatal', name: 'Pilates prénatal', duration: 60, price: 65 }
         ]
     },
     'fitness': {
         name: 'Fitness',
         sessions: [
-            { id: 'fullbody', name: 'Full Body Circuit', duration: 45, price: 40 },
-            { id: 'hiit', name: 'HIIT intensif', duration: 30, price: 35 },
-            { id: 'senior', name: 'Fitness senior', duration: 50, price: 45 }
+            { id: 'fullbody', name: 'Full Body Circuit', duration: 45, price: 45 },
+            { id: 'hiit', name: 'HIIT intensif', duration: 30, price: 40 },
+            { id: 'senior', name: 'Fitness senior', duration: 50, price: 50 }
         ]
     }
 };
 
-// État de la réservation
+// ===================== ÉTAT =====================
 let bookingData = {
-    discipline: 'pilates', // Simulé pour l'exemple
-    sessionType: 'prenatal', // Simulé pour l'exemple (50€, 60 min)
+    discipline: 'pilates',
+    sessionType: 'prenatal',
     date: '',
-    time: ''
+    time: '',
+    options: []
 };
-
-// État du calendrier personnalisé
 let currentCalendarDate;
 
-// Initialisation
-document.addEventListener('DOMContentLoaded', function() {
+// ===================== INIT =====================
+document.addEventListener('DOMContentLoaded', () => {
     loadBookingData();
-    setupCustomCalendar();
-    setupEventListeners();
-    updateSidebar();
 
-    // Afficher les créneaux si une date est déjà sélectionnée
+    if (!bookingData.discipline) bookingData.discipline = 'pilates';
+    if (!bookingData.sessionType) bookingData.sessionType = 'prenatal';
+
+    if (!bookingData.date) {
+        const urlDate = getDateFromUrl();
+        if (urlDate) bookingData.date = urlDate;
+    }
+
+    setupCustomCalendar();
+    updateSidebar();
     if (bookingData.date) {
-        showTimeSlots();
+        fetchReservedSlots(bookingData.date).then(() => showTimeSlots());
     }
     updateNextButton();
-});
-// Assurer que le bouton existe avant d'ajouter l'événement
-document.addEventListener('DOMContentLoaded', function() {
+
     const nextButton = document.getElementById('nextButton');
     if (nextButton) {
-        nextButton.addEventListener('click', function() {
-            if (bookingData.time && bookingData.date) {
-                // Sauvegarder les données avant de rediriger
-                saveBookingData();
-
-                // Récupérer l'URL depuis l'attribut data-url
-                const url = this.dataset.url;
-                if (url) {
-                    window.location.href = url;
-                } else {
-                    console.warn('Aucune URL définie pour le bouton Next.');
-                }
+        nextButton.addEventListener('click', () => {
+            if (!bookingData.date || !bookingData.time) {
+                alert("Veuillez sélectionner une date et un créneau.");
+                return;
             }
+            saveBookingData();
+            const url = nextButton.dataset.url;
+            if (url) window.location.href = url;
         });
     }
 });
 
+function getDateFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('date');
+}
 
-// ===================== LOGIQUE DE RÉSERVATION =====================
-
+// ===================== STORAGE =====================
 function loadBookingData() {
     const saved = localStorage.getItem('bookingData');
-    if (saved) {
-        const data = JSON.parse(saved);
-        // Utiliser les données sauvegardées ou les valeurs par défaut
-        bookingData.discipline = data.discipline || 'pilates';
-        bookingData.sessionType = data.sessionType || 'prenatal';
-        bookingData.date = data.date || '';
-        bookingData.time = data.time || '';
-    }
+    if (saved) Object.assign(bookingData, JSON.parse(saved));
 }
 
 function saveBookingData() {
-    const saved = localStorage.getItem('bookingData');
-    const existingData = saved ? JSON.parse(saved) : {};
-
-    const updatedData = {
-        ...existingData,
-        ...bookingData
-    };
-
-    localStorage.setItem('bookingData', JSON.stringify(updatedData));
+    localStorage.setItem('bookingData', JSON.stringify(bookingData));
 }
 
-function getSessionInfo() {
-    if (!bookingData.discipline || !bookingData.sessionType) return null;
-
-    const disc = disciplines[bookingData.discipline];
-    if (!disc) return null;
-
-    return disc.sessions.find(s => s.id === bookingData.sessionType);
+// ===================== UTILITAIRES =====================
+function dateToLocalISO(date) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
 }
 
-// ===================== CALENDRIER PERSONNALISÉ =====================
+function formatTime(date) {
+    return `${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')}`;
+}
 
+function isTomorrowOrAfter(dateObj) {
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    return dateObj >= tomorrow;
+}
+
+// ===================== CALENDRIER =====================
 const dateDisplay = document.getElementById('dateDisplay');
 const customCalendarPopup = document.getElementById('customCalendarPopup');
-const calendarTitle = document.getElementById('calendarTitle');
 const calendarDaysGrid = document.getElementById('calendarDaysGrid');
 const prevMonthBtn = document.getElementById('prevMonth');
 const nextMonthBtn = document.getElementById('nextMonth');
 
 function setupCustomCalendar() {
-    // Définir la date de début du calendrier (par défaut ou sélectionnée)
-    if (bookingData.date) {
-        currentCalendarDate = new Date(bookingData.date + 'T00:00:00');
-    } else {
-        // Commencer au mois de demain (règle "Pas de réservation le jour même")
-        currentCalendarDate = new Date();
-        currentCalendarDate.setDate(currentCalendarDate.getDate() + 1); // Date de demain
-        currentCalendarDate.setDate(1); // Aller au 1er du mois de demain
-    }
+    currentCalendarDate = bookingData.date ? new Date(bookingData.date + 'T00:00:00') : new Date();
+    currentCalendarDate.setDate(1);
 
-    // Afficher l'état initial
     renderCalendar(currentCalendarDate.getFullYear(), currentCalendarDate.getMonth());
     updateDateDisplay();
 
-    // Événement pour ouvrir/fermer le calendrier
-    dateDisplay.addEventListener('click', function(e) {
-        e.stopPropagation(); // Empêcher la propagation pour ne pas fermer immédiatement
-        toggleCalendar();
+    dateDisplay.addEventListener('click', e => {
+        e.stopPropagation();
+        customCalendarPopup.classList.toggle('active');
     });
 
-    // Événements pour la navigation
-    prevMonthBtn.addEventListener('click', () => changeMonth(-1));
-    nextMonthBtn.addEventListener('click', () => changeMonth(1));
+    prevMonthBtn.onclick = () => changeMonth(-1);
+    nextMonthBtn.onclick = () => changeMonth(1);
 
-    // Fermer le calendrier si on clique en dehors
-    document.addEventListener('click', function(event) {
-        if (!customCalendarPopup.contains(event.target) && event.target !== dateDisplay) {
+    document.addEventListener('click', e => {
+        if (!customCalendarPopup.contains(e.target) && e.target !== dateDisplay) {
             customCalendarPopup.classList.remove('active');
         }
     });
-}
-
-function toggleCalendar() {
-    customCalendarPopup.classList.toggle('active');
-}
-
-function updateDateDisplay() {
-    if (bookingData.date) {
-        const dateObj = new Date(bookingData.date + 'T00:00');
-        const day = dateObj.getDate();
-        const month = dateObj.getMonth() + 1;
-        const year = dateObj.getFullYear();
-        dateDisplay.textContent = `${day} / ${month} / ${year}`;
-    } else {
-        // État initial (peut être vide ou le format de la maquette '1 / 2 / 2025')
-        dateDisplay.textContent = 'Sélectionnez une date';
-    }
 }
 
 function changeMonth(delta) {
@@ -174,212 +160,230 @@ function changeMonth(delta) {
 
 function renderCalendar(year, month) {
     calendarDaysGrid.innerHTML = '';
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const offset = (firstDay.getDay() + 6) % 7;
+    const monthName = firstDay.toLocaleDateString('fr-FR', { month: 'long' });
+    customCalendarPopup.querySelector('.calendar-month-year').innerHTML =
+        `${monthName.charAt(0).toUpperCase()+monthName.slice(1)} <span class="year">${year}</span>`;
 
-    const firstDayOfMonth = new Date(year, month, 1);
-    const lastDayOfMonth = new Date(year, month + 1, 0);
-    // Calculer le jour de la semaine du 1er (0=Dim, 1=Lun... On veut Lun=0)
-    const firstDayOfWeek = (firstDayOfMonth.getDay() + 6) % 7;
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1); // La première date réservable
-
-    // Mettre à jour le titre du calendrier (pour le style maquette)
-    const monthName = firstDayOfMonth.toLocaleDateString('fr-FR', { month: 'long' });
-    const calendarMonthYear = customCalendarPopup.querySelector('.calendar-month-year');
-    calendarMonthYear.innerHTML = `${monthName.charAt(0).toUpperCase() + monthName.slice(1)} <span class="year">${year}</span>`;
-
-    // Remplir les jours du mois précédent (jours inactifs)
-    const prevMonthLastDay = new Date(year, month, 0).getDate();
-    for (let i = firstDayOfWeek - 1; i >= 0; i--) {
-        const day = document.createElement('span');
-        day.className = 'calendar-day inactive';
-        day.textContent = prevMonthLastDay - i;
-        calendarDaysGrid.appendChild(day);
+    const prevLastDay = new Date(year, month, 0).getDate();
+    for (let i = offset - 1; i >= 0; i--) {
+        const d = document.createElement('span');
+        d.className = 'calendar-day inactive';
+        d.textContent = prevLastDay - i;
+        calendarDaysGrid.appendChild(d);
     }
 
-    // Remplir les jours du mois actuel
-    for (let dayNum = 1; dayNum <= lastDayOfMonth.getDate(); dayNum++) {
-        const date = new Date(year, month, dayNum);
-        date.setHours(0, 0, 0, 0);
+    for (let i = 1; i <= lastDay.getDate(); i++) {
+        const date = new Date(year, month, i);
+        date.setHours(0,0,0,0);
+        const el = document.createElement('span');
+        el.className = 'calendar-day';
+        el.textContent = i;
 
-        const dayElement = document.createElement('span');
-        dayElement.textContent = dayNum;
-        dayElement.className = 'calendar-day';
+        if (!isTomorrowOrAfter(date)) el.classList.add('disabled');
+        else if (bookingData.date === dateToLocalISO(date)) el.classList.add('selected');
+        else el.onclick = () => selectDate(date);
 
-        const isSelectable = date >= tomorrow;
-
-        if (!isSelectable) {
-            dayElement.classList.add('disabled');
-        } else if (bookingData.date === dateToISOString(date)) {
-            dayElement.classList.add('selected');
-        } else {
-            dayElement.addEventListener('click', () => selectDate(date));
-        }
-
-        calendarDaysGrid.appendChild(dayElement);
+        calendarDaysGrid.appendChild(el);
     }
-}
-
-function dateToISOString(date) {
-    return date.toISOString().split('T')[0];
 }
 
 function selectDate(dateObj) {
-    const newDate = dateToISOString(dateObj);
+    if (!isTomorrowOrAfter(dateObj)) return alert("Vous ne pouvez pas réserver le jour même.");
 
-    // Si la même date est cliquée, désélectionner (logique non demandée mais bonne pratique)
-    if (bookingData.date === newDate) {
-        bookingData.date = '';
-        bookingData.time = '';
-    } else {
-        // Effacer le créneau si la date change
-        if (bookingData.date !== newDate) {
-            bookingData.time = '';
-        }
-        bookingData.date = newDate;
-    }
-
+    bookingData.date = dateToLocalISO(dateObj);
+    bookingData.time = '';
     saveBookingData();
-    updateDateDisplay();
-    // Re-rendre le calendrier pour afficher la sélection
-    renderCalendar(currentCalendarDate.getFullYear(), currentCalendarDate.getMonth());
+
+    // Récupération créneaux réservés depuis le backend
+    fetchReservedSlots(bookingData.date).then(() => {
+        showTimeSlots();
+    });
+
+    window.location.href = `/creneaux?date=${bookingData.date}`;
+}
+
+
+function updateDateDisplay() {
+    dateDisplay.textContent = bookingData.date
+        ? new Date(bookingData.date + 'T00:00:00').toLocaleDateString('fr-FR')
+        : 'Sélectionnez une date';
+}
+
+// ===================== CRÉNEAUX =====================
+function selectTimeSlot(slot) {
+    bookingData.time = slot;
+    saveBookingData();
     showTimeSlots();
     updateSidebar();
     updateNextButton();
-    toggleCalendar(); // Fermer le calendrier après la sélection
 }
 
-// ===================== LOGIQUE DES CRÉNEAUX HORAIRES =====================
+
+// Crée  Date en h locale du navigateur.
+function dateInParis(dateStr) {
+    // dateStr format 'YYYY-MM-DD HH:MM:SS' ou 'YYYY-MM-DDTHH:MM:SS'
+    const [datePart, timePart] = dateStr.split(/T| /);
+    const [year, month, day] = datePart.split('-').map(Number);
+    const [hours, minutes, seconds] = (timePart ? timePart.split(':') : [0,0,0]).map(Number);
+
+    // Crée une date JS en heure locale
+    return new Date(year, month-1, day, hours, minutes, seconds);
+}
+
+
+
+// Vérifie si un créneau chevauche une réservation
+function isSlotReserved(slotStart, slotEnd) {
+    return window.reservedSlots.some(res => {
+        const resStart = dateInParis(res.start);
+        const resEnd = dateInParis(res.end);
+
+        resStart.setSeconds(0,0);
+        resEnd.setSeconds(0,0);
+
+        return slotStart < resEnd && slotEnd > resStart;
+    });
+}
+
+
+
+
+
+// Génère les créneaux dynamiquement selon la durée
+function generateSlots(sessionDuration, startHour=8, endHour=20) {
+    const slots = [];
+    let h = startHour, m = 0;
+    while (h*60 + m + sessionDuration <= endHour*60) {
+        slots.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
+        m += 15;
+        if (m >= 60) { h += 1; m -= 60; }
+    }
+    return slots;
+}
 
 function showTimeSlots() {
     const timeSection = document.getElementById('timeSection');
     const timeGrid = document.getElementById('timeGrid');
     const timeTitle = document.getElementById('timeTitle');
-
     if (!bookingData.date) {
         timeSection.style.display = 'none';
         return;
     }
 
-    // Mettre à jour le titre
-    const dateObj = new Date(bookingData.date + 'T00:00');
-    const dateString = dateObj.toLocaleDateString('fr-FR', {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long'
-    });
-    // Format pour ressembler à "Créneaux disponibles pour lundi 1 décembre"
-    const formattedDateString = dateString.replace(/(^\w)/, c => c.toUpperCase());
-    timeTitle.textContent = `Créneaux disponibles pour ${formattedDateString}`;
+    const dateObj = new Date(bookingData.date + 'T00:00:00');
+    const now = new Date();
+    const session = getSessionInfo();
+    if (!session) return;
 
-    const sessionInfo = getSessionInfo();
-    const sessionDuration = sessionInfo ? sessionInfo.duration : null;
+    const sessionDuration = session.duration;
+    const startHour = 8;
+    const endHour = 20;
 
-    if (!sessionDuration) {
-        timeGrid.innerHTML = '<div class="error">Veuillez d\'abord sélectionner une session</div>';
-        timeSection.style.display = 'block';
-        return;
+    const slots = [];
+    for (let h = startHour; h < endHour; h++) {
+        for (let m = 0; m < 60; m += 15) {
+            const slotStart = dateInParis(`${bookingData.date} ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:00`);
+            slotStart.setSeconds(0,0);
+
+            const slotEnd = new Date(slotStart.getTime() + sessionDuration*60000);
+            slotEnd.setSeconds(0,0);
+
+            // Vérifie si le créneau chevauche la pause déjeuner 12h-14h
+            const pauseStart = new Date(slotStart);
+            pauseStart.setHours(12,0,0,0);
+            const pauseEnd = new Date(slotStart);
+            pauseEnd.setHours(14,0,0,0);
+
+            if (slotStart < pauseEnd && slotEnd > pauseStart) continue; // chevauche la pause, on skip
+
+            if(slotEnd.getHours() >= endHour && slotEnd.getMinutes() > 0) continue;
+
+            slots.push({start: slotStart, end: slotEnd});
+        }
     }
 
-    // Générer les créneaux
+
+
+    // Affichage titre
+    const dateLabel = dateObj.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' });
+    timeTitle.textContent = `Créneaux disponibles pour ${dateLabel.charAt(0).toUpperCase()+dateLabel.slice(1)}`;
+
     timeGrid.innerHTML = '';
-    availableSlots.forEach(slot => {
-        const endTime = getEndTime(slot, sessionDuration);
 
-        const slotElement = document.createElement('button');
-        // Simuler le créneau 08:00 sélectionné si aucune sélection n'a été faite
-        const isSelected = bookingData.time === slot;
+    slots.forEach(slot => {
+        const isPast = slot.end <= now && dateObj.toDateString() === now.toDateString();
+        const isReserved = isSlotReserved(slot.start, slot.end);
+        const slotStr = `${String(slot.start.getHours()).padStart(2,'0')}:${String(slot.start.getMinutes()).padStart(2,'0')}`;
+        const isSelected = bookingData.time === slotStr;
 
-        slotElement.className = `time-slot ${isSelected ? 'selected' : ''}`;
-
-        // Simuler le statut "Disponible" comme sur la maquette
-        slotElement.innerHTML = `
-            <div class="time-range">${slot} - ${endTime}</div>
+        const btn = document.createElement('button');
+        btn.className = `time-slot ${isSelected ? 'selected' : ''} ${isPast ? 'past' : ''} ${isReserved ? 'disabled reserved' : ''}`;
+        btn.disabled = isPast || isReserved;
+        btn.innerHTML = `
+            <div class="time-range">${slotStr} - ${formatTime(slot.end)}</div>
             <div class="time-status">
-                <i class="fas fa-check-circle"></i> Disponible
+                <i class="fas ${isReserved ? 'fa-times-circle' : 'fa-check-circle'}"></i>
+                ${isPast ? 'Passé' : (isReserved ? 'Réservé' : 'Disponible')}
             </div>
         `;
-
-        slotElement.addEventListener('click', () => selectTimeSlot(slot));
-        timeGrid.appendChild(slotElement);
+        if(!isPast && !isReserved) btn.addEventListener('click', () => selectTimeSlot(slotStr));
+        timeGrid.appendChild(btn);
     });
 
     timeSection.style.display = 'block';
 }
 
-function selectTimeSlot(time) {
-    bookingData.time = time;
-    saveBookingData();
-    showTimeSlots(); // Re-render pour marquer le créneau sélectionné
-    updateSidebar();
-    updateNextButton();
+
+
+// ===================== SIDEBAR =====================
+function getSessionInfo() {
+    return disciplines[bookingData.discipline]?.sessions.find(s=>s.id===bookingData.sessionType);
 }
-
-
-// ===================== LOGIQUE DE LA BARRE LATÉRALE =====================
 
 function updateSidebar() {
     const dateTitle = document.getElementById('dateTitle');
     const sessionDetails = document.getElementById('sessionDetails');
     const totalAmountElement = document.getElementById('totalAmount');
 
-    // Mettre à jour le titre de la date
-    if (bookingData.date) {
-        const dateObj = new Date(bookingData.date + 'T00:00');
-        const dateString = dateObj.toLocaleDateString('fr-FR', {
-            weekday: 'long',
-            day: 'numeric',
-            month: 'long'
-        });
-        const formattedDateString = dateString.charAt(0).toUpperCase() + dateString.slice(1);
-        dateTitle.textContent = `DATE SÉLECTIONNÉE : ${formattedDateString}`;
-    } else {
-        dateTitle.textContent = 'DATE SÉLECTIONNÉE : Aucune';
+    let slotHtml = '<div>• Créneau choisi : Non sélectionné</div>';
+    if (bookingData.time) {
+        const session = getSessionInfo();
+        const endTime = getEndTime(bookingData.time, session.duration);
+        slotHtml = `<div>• Créneau choisi : ${bookingData.time} - ${endTime}</div>`;
     }
 
-    // Mettre à jour les détails de la session
-    const sessionInfo = getSessionInfo();
-    const totalAmount = sessionInfo ? sessionInfo.price : 0;
+    if (bookingData.date){
+        const dateObj = new Date(bookingData.date+'T00:00:00');
+        const dateString = dateObj.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' });
+        dateTitle.textContent = `DATE SÉLECTIONNÉE : ${dateString.charAt(0).toUpperCase()+dateString.slice(1)}`;
+    } else dateTitle.textContent='DATE SÉLECTIONNÉE : Aucune';
 
-    if (sessionInfo) {
-        const sessionDuration = sessionInfo.duration;
-        const selectedSlotTime = bookingData.time || 'Non sélectionné';
-
-        let slotDetailHtml = '<div>• Créneau choisi : Non sélectionné</div>';
-
-        if (bookingData.time) {
-            const endTime = getEndTime(bookingData.time, sessionDuration);
-            slotDetailHtml = `<div>• Créneau choisi : ${bookingData.time} - ${endTime}</div>`;
-        }
-
+    const session = getSessionInfo();
+    if (session){
         sessionDetails.innerHTML = `
-            <div>• Séance : ${sessionInfo.name}</div>
-            <div>• Durée : ${sessionDuration} minutes</div>
-            ${slotDetailHtml}
+            <div>• Séance : ${session.name}</div>
+            <div>• Durée : ${session.duration} minutes</div>
+            ${slotHtml}
         `;
+        totalAmountElement.textContent = `${session.price}€`;
     } else {
-        sessionDetails.innerHTML = '<div>Aucune session sélectionnée</div>';
-    }
-
-    // Mettre à jour le total
-    if (totalAmountElement) {
-        totalAmountElement.textContent = `${totalAmount}€`;
+        sessionDetails.innerHTML='<div>Aucune session sélectionnée</div>';
+        totalAmountElement.textContent='0€';
     }
 }
 
-function getEndTime(startTime, duration) {
-    const [startH, startM] = startTime.split(':').map(Number);
-    const totalMinutes = startH * 60 + startM + duration;
-    const endH = Math.floor(totalMinutes / 60) % 24;
-    const endM = totalMinutes % 60;
-    return `${endH.toString().padStart(2, '0')}:${endM.toString().padStart(2, '0')}`;
+function getEndTime(start,duration){
+    const [h,m]=start.split(':').map(Number);
+    const date=new Date();
+    date.setHours(h,m,0,0);
+    date.setMinutes(date.getMinutes()+duration);
+    return `${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')}`;
 }
 
-function updateNextButton() {
-    const nextButton = document.getElementById('nextButton');
-    nextButton.disabled = !bookingData.time || !bookingData.date;
+// ===================== BOUTON NEXT =====================
+function updateNextButton(){
+    document.getElementById('nextButton').disabled = !bookingData.date || !bookingData.time;
 }
-
-

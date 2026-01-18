@@ -1,6 +1,3 @@
-/* =========================
-   DONNÉES DE CONFIGURATION
-========================= */
 
 const disciplines = {
     'yin-yoga': {
@@ -43,6 +40,7 @@ const frequencies = [
     { id: '12sessions', discount: 35 }
 ];
 
+
 /* =========================
    ÉTAT
 ========================= */
@@ -60,6 +58,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* =========================
+   OUTILS
+========================= */
+
+function formatTime(date) {
+    return date.toTimeString().slice(0, 5);
+}
+
+function formatForGoogleCalendar(date) {
+    const pad = n => n.toString().padStart(2, '0');
+    return `${date.getFullYear()}${pad(date.getMonth()+1)}${pad(date.getDate())}T${pad(date.getHours())}${pad(date.getMinutes())}00`;
+}
+
+/* =========================
    DONNÉES RÉSERVATION
 ========================= */
 
@@ -67,14 +78,24 @@ function loadBookingData() {
     const saved = localStorage.getItem('bookingData');
 
     if (!saved) {
-        window.location.href = 'reservation-service.html';
+        showNotification("Aucune réservation trouvée. Veuillez remplir le formulaire.", "error");
+        setTimeout(() => { window.location.href = '/client'; }, 2000);
         return;
     }
 
-    bookingData = JSON.parse(saved);
+    try {
+        bookingData = JSON.parse(saved);
+    } catch (err) {
+        console.error("Erreur parsing bookingData:", err);
+        showNotification("Données de réservation corrompues. Veuillez remplir le formulaire.", "error");
+        setTimeout(() => { window.location.href = '/client'; }, 2000);
+        return;
+    }
 
     if (!bookingData.discipline || !bookingData.sessionType || !bookingData.date || !bookingData.time) {
-        window.location.href = 'reservation-service.html';
+        showNotification("Informations de réservation incomplètes. Veuillez remplir le formulaire.", "error");
+        setTimeout(() => { window.location.href = '/client'; }, 2000);
+        return;
     }
 }
 
@@ -83,78 +104,79 @@ function loadBookingData() {
 ========================= */
 
 function displayBookingDetails() {
+    if (!bookingData.identity || !bookingData.address) return;
 
-    /* -------- EMAIL -------- */
+    // Email client
     const clientEmail = document.getElementById('clientEmail');
-    if (clientEmail && bookingData.identity?.email) {
-        clientEmail.textContent = bookingData.identity.email;
-    }
+    if (clientEmail) clientEmail.textContent = bookingData.identity.email || '';
 
-    /* -------- SESSION -------- */
+    // Détails séance
     const sessionDetails = document.getElementById('sessionDetails');
     const sessionInfo = getSessionInfo();
-
     if (sessionDetails && sessionInfo) {
         const startDate = new Date(`${bookingData.date}T${bookingData.time}`);
         const endDate = new Date(startDate.getTime() + sessionInfo.duration * 60000);
-        const endTime = endDate.toTimeString().slice(0, 5);
-
-        const formattedDate = startDate.toLocaleDateString('fr-FR', {
-            weekday: 'long',
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
+        const formattedDate = startDate.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
         sessionDetails.innerHTML = `
             <div>• Discipline : ${disciplines[bookingData.discipline].name}</div>
             <div>• Type : ${sessionInfo.name}</div>
             <div>• Durée : ${sessionInfo.duration} minutes</div>
             <div>• Date : ${formattedDate}</div>
-            <div>• Horaire : ${bookingData.time} - ${endTime}</div>
+            <div>• Horaire : ${formatTime(startDate)} - ${formatTime(endDate)}</div>
+        `;
+
+        // Bouton Paiement
+        const payBtn = document.getElementById('payNow');
+        if (payBtn) {
+            if (bookingData.paidFromBackend === true) {
+                payBtn.textContent = 'Paiement effectué';
+                payBtn.disabled = true;
+            } else {
+                payBtn.textContent = 'Payer maintenant';
+                payBtn.disabled = false;
+            }
+        }
+    }
+
+    // Infos client
+    const clientInfo = document.getElementById('clientInfo');
+    if (clientInfo) {
+        const addr = bookingData.address;
+        const birthDate = bookingData.identity.birthDate ? new Date(bookingData.identity.birthDate).toLocaleDateString('fr-FR') : '';
+        clientInfo.innerHTML = `
+            <li>Civilité : ${bookingData.identity.civility || ''}</li>
+            <li>Nom : ${bookingData.identity.lastName || ''}</li>
+            <li>Prénom : ${bookingData.identity.firstName || ''}</li>
+            <li>Date de naissance : ${birthDate}</li>
+            <li>Email : ${bookingData.identity.email || ''}</li>
+            <li>Téléphone : ${bookingData.identity.phone || ''}</li>
+            <li>Adresse : ${addr.street}${addr.complement ? ', ' + addr.complement : ''}</li>
+            <li>Ville : ${addr.city || ''}</li>
+            <li>Type de logement : ${addr.housingType || ''}</li>
+            ${addr.floor ? `<li>Étage : ${addr.floor}</li>` : ''}
+            ${addr.hasElevator ? `<li>Ascenseur : Oui</li>` : ''}
+            ${addr.accessInfo ? `<li>Accès : ${addr.accessInfo}</li>` : ''}
+            <li>Parking : ${addr.parking || ''}</li>
         `;
     }
 
-    /* -------- CLIENT -------- */
-    const clientDetails = document.getElementById('clientDetails');
+    // Récap financier
+    const financialSummary = document.getElementById('financialSummary');
+    if (financialSummary && sessionInfo) {
+        const total = calculateTotal();
+        const optionsTotal = bookingData.options?.length
+            ? bookingData.options.map(id => additionalOptions.find(o => o.id === id)?.price || 0).reduce((a, b) => a + b, 0)
+            : 0;
 
-    if (clientDetails && bookingData.identity && bookingData.address) {
-        let civility = '';
-        if (bookingData.identity.civility === 'mme') civility = 'Madame';
-        if (bookingData.identity.civility === 'm') civility = 'Monsieur';
-
-        let html = `
-            <div>• ${civility} ${bookingData.identity.firstName} ${bookingData.identity.lastName}</div>
-            <div>• ${bookingData.identity.email}</div>
-            <div>• ${bookingData.identity.phone}</div>
-            <div>• ${bookingData.address.street}</div>
+        financialSummary.innerHTML = `
+            <li>Prix : ${sessionInfo.price.toFixed(2)} €</li>
+            <li>Options : ${optionsTotal.toFixed(2)} €</li>
+            <li><strong>Total : ${total.toFixed(2)} €</strong></li>
         `;
-
-        if (bookingData.address.complement) {
-            html += `<div>• ${bookingData.address.complement}</div>`;
-        }
-
-        clientDetails.innerHTML = html;
-    }
-
-    /* -------- FINANCIER -------- */
-    const financialDetails = document.getElementById('financialDetails');
-    const total = calculateTotal();
-
-    if (financialDetails && sessionInfo) {
-        let html = `<div>• Séance ${sessionInfo.name} : ${sessionInfo.price}€</div>`;
-
-        if (bookingData.options?.length) {
-            bookingData.options.forEach(id => {
-                const opt = additionalOptions.find(o => o.id === id);
-                if (opt) html += `<div>• ${opt.name} : +${opt.price}€</div>`;
-            });
-        }
-
-        html += `<div class="total-amount">• Total : ${total}€</div>`;
-        financialDetails.innerHTML = html;
     }
 }
+
 
 /* =========================
    CALCULS
@@ -168,82 +190,261 @@ function getSessionInfo() {
 function calculateTotal() {
     let total = 0;
     const session = getSessionInfo();
-
     if (session) total += session.price;
 
-    bookingData.options?.forEach(id => {
-        const opt = additionalOptions.find(o => o.id === id);
-        if (opt) total += opt.price;
-    });
-
-    const freq = frequencies.find(f => f.id === bookingData.frequency);
-    if (freq?.discount) {
-        total *= (1 - freq.discount / 100);
+    if (bookingData.options?.length) {
+        bookingData.options.forEach(optId => {
+            const opt = additionalOptions.find(o => o.id === optId);
+            if (opt) total += opt.price || 0;
+        });
     }
 
-    return Math.round(total);
+    const freq = frequencies.find(f => f.id === bookingData.frequency);
+    if (freq?.discount) total *= (1 - freq.discount / 100);
+
+    return total;
 }
+
 
 /* =========================
    EVENTS
 ========================= */
 
 function setupEventListeners() {
+    // Bouton Payer maintenant
+    const payBtn = document.getElementById('payNow');
+    if (payBtn) {
+        payBtn.addEventListener('click', () => {
+            console.log('initiatePayment déclenchée !');
+            initiatePayment();
+        });
+    }
 
-    document.getElementById('downloadPdf')?.addEventListener('click', () => {
-        simulateDownload('confirmation-reservation.pdf');
-        showNotification('PDF en cours de téléchargement');
-    });
-
-    document.getElementById('addCalendar')?.addEventListener('click', addToCalendar);
-
-    document.getElementById('payNow')?.addEventListener('click', initiatePayment);
-
-    document.getElementById('homeButton')?.addEventListener('click', () => {
-        if (confirm("Retourner à l’accueil ?")) {
-            localStorage.clear();
-            window.location.href = 'reservation-service.html';
-        }
-    });
+    // Boutons PDF et Google Calendar
+    document.getElementById('addCalendar')?.addEventListener('click', addToGoogleCalendar);
+    document.getElementById('downloadPdf')?.addEventListener('click', downloadPDF);
 }
+
 
 /* =========================
    ACTIONS
 ========================= */
 
-function simulateDownload(filename) {
-    const blob = new Blob(['Confirmation de réservation'], { type: 'application/pdf' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-    link.click();
+function initiatePayment() {
+    showNotification('Redirection vers le paiement sécurisé...', 'info');
+
+    setTimeout(async () => {
+        const session = getSessionInfo();
+        if (!session) return;
+
+        const startDate = new Date(`${bookingData.date}T${bookingData.time}`);
+        const endDate = new Date(startDate.getTime() + session.duration * 60000);
+        const optionsData = bookingData.options?.map(id => additionalOptions.find(o => o.id === id)) || [];
+        const prixOptions = optionsData.reduce((sum, o) => sum + (o?.price || 0), 0);
+        const total = calculateTotal();
+
+        const reservationPayload = {
+            identity: {
+                lastName: bookingData.identity.lastName,
+                firstName: bookingData.identity.firstName,
+                email: bookingData.identity.email,
+                phone: bookingData.identity.phone || '',
+                birthDate: bookingData.identity.birthDate || '',
+                civility: bookingData.identity.civility || ''
+            },
+            address: {
+                street: bookingData.address.street || '',
+                complement: bookingData.address.complement || '',
+                city: bookingData.address.city || '',
+                housingType: bookingData.address.housingType || '',
+                floor: bookingData.address.floor || 0,
+                hasElevator: bookingData.address.hasElevator || false,
+                accessInfo: bookingData.address.accessInfo || '',
+                parking: bookingData.address.parking || '',
+                lat: bookingData.address.lat || 0,
+                lng: bookingData.address.lng || 0
+            },
+            discipline: bookingData.discipline,
+            sessionType: getSessionInfo()?.id || '',
+            sessionName: getSessionInfo()?.name || '',
+            date: bookingData.date,
+            time: bookingData.time,
+            duration: getSessionInfo()?.duration || 0,
+            price: getSessionInfo()?.price || 0,
+            options: bookingData.options?.map(id => {
+                const o = additionalOptions.find(opt => opt.id === id);
+                return o ? { id: o.id, name: o.name, price: o.price } : null;
+            }).filter(Boolean),
+            total: calculateTotal(),
+            frequency: bookingData.frequency || 'unique',
+            status: 'pending'
+
+        };
+
+
+        try {
+            const response = await fetch('/reservation/create', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(reservationPayload)
+            });
+            const result = await response.json();
+
+
+
+            if (result.success) {
+                bookingData.paidFromBackend = true; // flag réel backend
+                localStorage.setItem('bookingData', JSON.stringify(bookingData));
+
+
+                const btn = document.getElementById('payNow');
+                if (btn) {
+                    btn.textContent = 'Paiement effectué';
+                    btn.disabled = true;
+                }
+
+
+                showNotification("Vous pouvez maintenant télécharger le PDF ou ajouter la séance au calendrier.", "success");
+
+                const reservations = JSON.parse(localStorage.getItem('reservations')) || [];
+                reservations.push(reservationPayload);
+                localStorage.setItem('reservations', JSON.stringify(reservations));
+            } else {
+                showNotification('Erreur lors de l’enregistrement de la réservation', 'error');
+                console.error('Backend response:', result);
+            }
+        } catch (err) {
+            console.error(err);
+            showNotification('Erreur serveur : impossible de sauvegarder la réservation', 'error');
+        }
+    }, 1500);
 }
 
-function addToCalendar() {
+
+function addToGoogleCalendar(e) {
+    e.preventDefault();
     const session = getSessionInfo();
-    if (!session) return;
+    if (!session || !bookingData.date || !bookingData.time || !bookingData.identity) {
+        showNotification("Impossible d'ajouter au calendrier : données manquantes.", "error");
+        return;
+    }
 
-    const start = new Date(`${bookingData.date}T${bookingData.time}`);
-    const end = new Date(start.getTime() + session.duration * 60000);
+    const startDate = new Date(`${bookingData.date}T${bookingData.time}`);
+    const endDate = new Date(startDate.getTime() + session.duration * 60000);
 
-    const format = d => d.toISOString().replace(/-|:|\.\d+/g, '');
-    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(session.name)}&dates=${format(start)}/${format(end)}`;
+    const title = `${disciplines[bookingData.discipline].name} - ${session.name}`;
+    const details = `Séance réservée avec ${bookingData.identity.firstName} ${bookingData.identity.lastName}`;
+
+    const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${formatForGoogleCalendar(startDate)}/${formatForGoogleCalendar(endDate)}&details=${encodeURIComponent(details)}`;
 
     window.open(url, '_blank');
 }
 
-function initiatePayment() {
-    showNotification('Redirection vers le paiement sécurisé...', 'info');
+function downloadPDF() {
+    if (!bookingData || !bookingData.identity || !bookingData.address) {
+        alert('Aucune réservation à exporter.');
+        return;
+    }
+    const JsPDF = window.jspdf?.jsPDF || window.jsPDF;
+    if (!JsPDF) {
+        alert('Erreur : jsPDF non chargé.');
+        return;
+    }
 
-    setTimeout(() => {
-        const btn = document.getElementById('payNow');
-        if (btn) {
-            btn.textContent = ' Paiement effectué';
-            btn.disabled = true;
+    const doc = new JsPDF();
+
+
+    doc.setFontSize(18);
+    doc.text('Confirmation de réservation', 20, 20);
+    doc.setFontSize(12);
+
+    let y = 40;
+
+// On récupère les options valides
+    const optionsData = (bookingData.options || [])
+        .map(opt => {
+            if (typeof opt === 'string') return additionalOptions.find(o => o.id === opt);
+            return opt;
+        })
+        .filter(opt => opt && typeof opt.price === 'number');
+
+
+    // =======================
+    // Informations client
+    // =======================
+    doc.text('Informations client :', 20, y); y += 10;
+    doc.text(`Civilité : ${bookingData.identity.civility || ''}`, 25, y); y += 7;
+    doc.text(`Nom : ${bookingData.identity.lastName || ''}`, 25, y); y += 7;
+    doc.text(`Prénom : ${bookingData.identity.firstName || ''}`, 25, y); y += 7;
+    if (bookingData.identity.birthDate) {
+        doc.text(`Date de naissance : ${new Date(bookingData.identity.birthDate).toLocaleDateString('fr-FR')}`, 25, y); y += 7;
+    }
+    doc.text(`Email : ${bookingData.identity.email || ''}`, 25, y); y += 7;
+    doc.text(`Téléphone : ${bookingData.identity.phone || ''}`, 25, y); y += 7;
+
+    const addr = bookingData.address;
+    doc.text('Adresse :', 25, y); y += 7;
+    doc.text(`${addr.street}${addr.complement ? ', ' + addr.complement : ''}`, 30, y); y += 7;
+    doc.text(`${addr.city || ''} - Type logement : ${addr.housingType || ''}`, 30, y); y += 7;
+    if (addr.floor) doc.text(`Étage : ${addr.floor}`, 30, y); y += addr.floor ? 7 : 0;
+    if (addr.hasElevator) doc.text(`Ascenseur : Oui`, 30, y); y += addr.hasElevator ? 7 : 0;
+    if (addr.accessInfo) doc.text(`Accès : ${addr.accessInfo}`, 30, y); y += addr.accessInfo ? 7 : 0;
+    doc.text(`Parking : ${addr.parking || ''}`, 30, y); y += 10;
+
+    // =======================
+    // Détails de la séance
+    // =======================
+    const session = getSessionInfo();
+    if (session) {
+        const startDate = new Date(`${bookingData.date}T${bookingData.time}`);
+        const endDate = new Date(startDate.getTime() + session.duration * 60000);
+
+        doc.text('Détails de la séance :', 20, y); y += 10;
+        doc.text(`Discipline : ${disciplines[bookingData.discipline].name}`, 25, y); y += 7;
+        doc.text(`Type : ${session.name}`, 25, y); y += 7;
+        doc.text(`Durée : ${session.duration} minutes`, 25, y); y += 7;
+        doc.text(`Date : ${startDate.toLocaleDateString('fr-FR')}`, 25, y); y += 7;
+        doc.text(`Horaire : ${formatTime(startDate)} - ${formatTime(endDate)}`, 25, y); y += 10;
+
+// Affichage des options
+        if (optionsData.length) {
+            doc.text('Options choisies :', 20, y);
+            y += 10;
+
+            optionsData.forEach(opt => {
+                if (!opt) return; // ignore undefined
+                const name = opt.name || 'Option inconnue';
+                const price = typeof opt.price === 'number' ? opt.price : 0;
+                doc.text(`${name} : ${price.toFixed(2)} €`, 25, y);
+                y += 7;
+            });
+
+            y += 5;
         }
-        showNotification('Paiement réussi', 'success');
-    }, 1500);
+
+
+    }
+
+    // =======================
+    // Récapitulatif financier
+    // =======================
+    const total = calculateTotal();
+    doc.text('Récapitulatif financier :', 20, y); y += 10;
+    if (session) doc.text(`Prix séance : ${session.price.toFixed(2)} €`, 25, y); y += 7;
+
+    if (optionsData.length) {
+        const optionsTotal = optionsData.reduce((sum, o) => sum + o.price, 0);
+        doc.text(`Total options : ${optionsTotal.toFixed(2)} €`, 25, y);
+        y += 7;
+    }
+
+
+
+    doc.text(`Total : ${total.toFixed(2)} €`, 25, y);
+
+    doc.save('reservation.pdf');
 }
+
 
 /* =========================
    NOTIFICATIONS
@@ -251,7 +452,6 @@ function initiatePayment() {
 
 function showNotification(message, type = 'info') {
     const notif = document.createElement('div');
-    notif.className = `notification ${type}`;
     notif.textContent = message;
 
     Object.assign(notif.style, {
@@ -266,5 +466,5 @@ function showNotification(message, type = 'info') {
     });
 
     document.body.appendChild(notif);
-    setTimeout(() => notif.remove(), 3000);
+    setTimeout(() => notif.remove(), 4000);
 }

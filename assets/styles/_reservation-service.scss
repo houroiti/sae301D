@@ -1,8 +1,7 @@
 // ============================================
-// RESERVATION SERVICE PAGE - SCSS
+// RESERVATION SERVICE PAGE - SCSS RESPONSIVE
 // ============================================
-// Fichier: _reservation-service.scss
-// Structure identique à la page client
+@import 'mixins';
 
 // Variables
 $brown-dark: #4b3a33;
@@ -14,534 +13,832 @@ $brown: #8b7b73;
 $bg-light: #f5f1ed;
 $bg-cream: #faf8f6;
 
-// ============================================
-// SPECIFICITÉ : Applique ces styles UNIQUEMENT sur la page service
-// ============================================
-// Ajoute ceci dans ton HTML : <body class="page-reservation-service">
 
 body.page-reservation-service {
-  font-family: "Georgia", "Times New Roman", serif;
-  background: linear-gradient(135deg, $bg-light 0%, $bg-cream 100%);
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-
-  // CONTAINER
-  .container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem 2rem 0 !important;
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 3rem;
-    min-height: calc(100vh - 120px);
-    position: relative;
-
-    &::before {
-      content: none;
-    }
-
-    @media (max-width: 1024px) {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      padding: 0 1.5rem 1.5rem 1.5rem !important;
-    }
-
-    @media (max-width: 768px) {
-      padding: 0 1rem 1rem 1rem !important;
-    }
-  }
-// PROGRESS BAR (LEFT SIDE)
-// PROGRESS BAR (LEFT SIDE)
-.progress-bar {
-  position: sticky;
-  top: 0;
-  height: fit-content;
-  padding: 1rem 0 0 0 !important;
-  margin: 0 !important;
-  width: 300px;
-
-  > .step.completed:first-child {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100%;
-  }
-
-  @media (max-width: 1024px) {
-    position: relative;
-    top: 0;
-    padding-top: 2rem !important;
-    width: 100%;
-  }
-}
-
-.side-image {
-  width: 100% !important;
-  max-width: 100% !important;
-  height: 660px;
-  object-fit: cover;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: block;
-
-  @media (max-width: 1024px) {
-    height: 500px;
-  }
-
-  @media (max-width: 768px) {
-    height: 350px;
-  }
-}
-
-.progress-bar-vertical {
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: -3rem;
-    transform: translateX(-50%);
-    width: 2px;
-    height: calc(100% + 1rem);
-    background: #4B3935;
-    z-index: 0;
-  }
-
-  .step {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: auto;
-    margin-bottom: 4rem !important;
-
-    &:last-child {
-      margin-bottom: 0 !important;
-    }
-
-    &-number {
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 50%;
-      border: 2px solid #4B3935;
-      background: #faf8f6 !important;  // 🔥 Tous les steps ont le fond clair par défaut
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: #4B3935 !important;  // 🔥 Texte marron par défaut
-      flex-shrink: 0;
-      transition: all 0.3s ease;
-      font-family: 'Montserrat', sans-serif;
-      z-index: 2;
-      position: relative;
-    }
-
-    &-label {
-      display: none !important;
-    }
-
-    // 🔥 PAR DÉFAUT : TOUS LES STEPS SONT CLAIRS
-    &:not(.active) {
-      .step-number {
-        background: #faf8f6 !important;
-        border-color: #4B3935 !important;
-        color: #4B3935 !important;
-      }
-    }
-
-    // 🔥 SEUL LE STEP ACTIVE EST COLORÉ
-    &.active {
-      .step-number {
-        background: #4B3935 !important;
-        border-color: #4B3935 !important;
-        color: #fff !important;
-      }
-    }
-  }
-
-  .step-line {
-    display: none;
-  }
-}
-
-  // CONTENT WRAPPER
-  .content-wrapper {
-    width: 100%;
-    padding: 1rem 0 0 0;
+    font-family: "Georgia", "Times New Roman", serif;
+    background: linear-gradient(135deg, $bg-light 0%, $bg-cream 100%);
+    min-height: 100vh;
     margin: 0;
-    display: flex;
-    gap: 32px;
-  }
-
-  .main-content {
-    flex: 1;
     padding: 0;
-    margin: 0;
-  }
 
-  .card {
-    background: transparent;
-    border-radius: 0;
-    padding: 0;
-    box-shadow: none;
+    // CONTAINER
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem 2rem 0 !important;
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 3rem;
+        min-height: calc(100vh - 120px);
+        position: relative;
 
-    @media (max-width: 768px) {
-      padding: 0;
-    }
-  }
+        &::before {
+            content: none;
+        }
 
-  // TITRES
-  .title {
-    font-family: 'Candlescript Demo Version', cursive;
-    font-size: 2.5rem;
-    font-weight: 400;
-    color: #2c2623;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.02em;
-    padding: 0;
-    background: transparent;
+        @media (max-width: 1024px) {
+            grid-template-columns: 200px 1fr;
+            padding: 0 1rem 1rem 1rem !important;
+            gap: 1.5rem;
+        }
 
-    @media (max-width: 768px) {
-      font-size: 2rem;
-    }
-  }
-
-  .subtitle {
-    font-size: 0.95rem;
-    color: #6b5d54;
-    text-align: center;
-    margin-bottom: 2.5rem;
-    font-weight: 300;
-    padding: 0;
-    background: transparent;
-  }
-
-  .section {
-    margin-bottom: 48px;
-  }
-
-  .section-title {
-    font-size: 22px;
-    margin-bottom: 20px;
-    font-weight: normal;
-  }
-
-  // DISCIPLINES
-  .discipline-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-
-  .discipline-btn {
-    padding: 28px;
-    border-radius: 18px;
-    border: 1.5px solid $border-soft;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: left;
-
-    // Font Times New Roman Italic pour les titres des disciplines
-    .discipline-name {
-      font-family: 'Times New Roman Italic', 'Times New Roman', Times, serif;
-      font-style: italic;
-      font-size: 2rem;
-      color: #4B3935;
-      margin-bottom: 8px;
+        @media (max-width: 768px) {
+            grid-template-columns: 100px 1fr;
+            padding: 0 0.5rem 0.5rem 0.5rem !important;
+            gap: 0.75rem;
+        }
     }
 
-    &:hover {
-      border-color: $brown-light;
-      transform: translateY(-2px);
+    // PROGRESS BAR (LEFT SIDE)
+    .progress-bar {
+        position: sticky;
+        top: 0;
+        height: fit-content;
+        padding: 1rem 0 0 0 !important;
+        margin: 0 !important;
+        width: 300px;
+
+        > .step.completed:first-child {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            width: 200px;
+            padding: 0.5rem 0 0 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            width: 100px;
+            padding: 0.25rem 0 0 0 !important;
+        }
     }
 
-    &.active {
-      background-color: #4B3935;
-      color: white;
-      border-color: #4B3935;
+    .side-image {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 660px;
+        object-fit: cover;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block;
 
-      .discipline-name {
-        color: white;
-      }
+        @media (max-width: 1024px) {
+            height: 400px;
+        }
 
-      .discipline-subtitle {
-        color: #e8ddd6;
-      }
-    }
-  }
-
-  .discipline-subtitle {
-    color: $text-muted;
-    font-size: 14px;
-    margin-top: 4px;
-  }
-
-  // SÉANCES
-  .session-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .session-item {
-    border-radius: 20px;
-    padding: 28px;
-    border: 1.5px solid $border-soft;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: transparent;
-
-    &:hover {
-      border-color: $brown-light;
-      transform: translateY(-2px);
+        @media (max-width: 768px) {
+            height: 280px;
+        }
     }
 
-    &.active {
-      background-color: #4B3935;
-      color: white;
-      border-color: #4B3935;
+    .progress-bar-vertical {
+        position: relative;
 
-      .session-name {
-        color: white;
-      }
+        &::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: -3rem;
+            transform: translateX(-50%);
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: #4B3935;
+            z-index: 0;
 
-      .session-price {
-        color: white;
-        border-left-color: rgba(255, 255, 255, 0.3);
-      }
+            @media (max-width: 1024px) {
+                top: -2rem;
+            }
 
-      .session-desc,
-      .session-info {
-        color: #e8ddd6;
-      }
-    }
-  }
+            @media (max-width: 768px) {
+                top: -1.5rem;
+                width: 1.5px;
+            }
+        }
 
-  .session-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-    margin-bottom: 16px;
-  }
+        .step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: auto;
+            margin-bottom: 4rem !important;
 
-  .session-name {
-    font-size: 1.3rem;
-    color: #4B3935;
-    font-weight: 600;
-    flex: 1;
-  }
+            &:last-child {
+                margin-bottom: 0 !important;
+            }
 
-  .session-price {
-    font-family: 'Times New Roman Italic', 'Times New Roman', Times, serif;
-    font-style: italic;
-    font-size: 1.8rem;
-    color: #4B3935;
-    white-space: nowrap;
-    padding-left: 24px;
-    border-left: 1px solid #4B3935;
-  }
+            @media (max-width: 1024px) {
+                margin-bottom: 2.5rem !important;
+            }
 
-  .session-desc {
-    margin-bottom: 8px;
-    color: $text-main;
-    font-size: 0.95rem;
-  }
+            @media (max-width: 768px) {
+                margin-bottom: 1.75rem !important;
+            }
 
-  .session-info {
-    font-size: 0.9rem;
-    color: $text-muted;
-    margin-bottom: 4px;
-  }
+            &-number {
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 50%;
+                border: 2px solid #4B3935;
+                background: #faf8f6 !important;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.95rem;
+                font-weight: 500;
+                color: #4B3935 !important;
+                flex-shrink: 0;
+                transition: all 0.3s ease;
+                font-family: 'Montserrat', sans-serif;
+                z-index: 2;
+                position: relative;
 
-  .session-warning {
-    margin-top: 12px;
-    padding: 10px;
-    background-color: rgba(255, 193, 7, 0.1);
-    border-left: 3px solid #ffc107;
-    font-size: 0.85rem;
-    color: #856404;
+                @media (max-width: 1024px) {
+                    width: 2rem;
+                    height: 2rem;
+                    font-size: 0.85rem;
+                }
 
-    .session-item.active & {
-      background-color: rgba(255, 193, 7, 0.2);
-      color: #fff3cd;
-      border-left-color: #fff3cd;
-    }
+                @media (max-width: 768px) {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    font-size: 0.7rem;
+                    border-width: 1.5px;
+                }
+            }
 
-    i {
-      margin-right: 6px;
-    }
-  }
+            &-label {
+                display: none !important;
+            }
 
-  // OPTIONS
-  .options-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
+            // PAR DÉFAUT : TOUS LES STEPS SONT CLAIRS
+            &:not(.active) {
+                .step-number {
+                    background: #faf8f6 !important;
+                    border-color: #4B3935 !important;
+                    color: #4B3935 !important;
+                }
+            }
 
-  .option-item {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    border-radius: 20px;
-    padding: 24px;
-    border: 1.5px solid $border-soft;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: transparent;
+            // SEUL LE STEP ACTIVE EST COLORÉ
+            &.active {
+                .step-number {
+                    background: #4B3935 !important;
+                    border-color: #4B3935 !important;
+                    color: #fff !important;
+                }
+            }
+        }
 
-    &:hover {
-      border-color: $brown-light;
-    }
-
-    input {
-      margin-top: 6px;
-
-      &:checked {
-        accent-color: #f1e6df;
-      }
-    }
-
-    &:has(input:checked) {
-      background-color: $brown-dark;
-      color: white;
-      border-color: $brown-dark;
-
-      .option-name,
-      .option-desc,
-      .option-price {
-        color: white;
-      }
-    }
-  }
-
-  .option-price {
-    font-weight: bold;
-    margin-top: 8px;
-  }
-
-  // SIDEBAR
-  .sidebar {
-    width: 360px;
-    flex-shrink: 0;
-
-    @media (max-width: 1024px) {
-      width: 100%;
-      order: -1;
-    }
-  }
-
-  .summary-card {
-    background-color: $brown;
-    color: white;
-    border-radius: 24px;
-    padding: 32px;
-    position: sticky;
-    top: 40px;
-
-    @media (max-width: 1024px) {
-      position: static;
-    }
-  }
-
-  .summary-title {
-    font-size: 16px;
-    margin-bottom: 24px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .summary-details {
-    span {
-      color: #d6c8bf;
+        .step-line {
+            display: none;
+        }
     }
 
-    p {
-      margin-bottom: 12px;
-      font-size: 14px;
-    }
-  }
-
-  .summary-options {
-    margin: 24px 0;
-  }
-
-  .options-title {
-    font-weight: bold;
-    font-size: 14px;
-    margin-bottom: 8px;
-  }
-
-  .total {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 32px 0;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  // BOUTON
-  .btn-next {
-    width: 100%;
-    background-color: #f1e6df;
-    color: $brown-dark;
-    border: none;
-    border-radius: 40px;
-    padding: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease;
-
-    &:hover:not(:disabled) {
-      background-color: #e8d9cf;
-      transform: translateY(-2px);
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  }
-
-  // RESPONSIVE
-  @media (max-width: 1200px) {
-    .discipline-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .discipline-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .options-list {
-      grid-template-columns: 1fr;
-    }
-
+    // CONTENT WRAPPER
     .content-wrapper {
-      flex-direction: column;
-    }
-  }
+        width: 100%;
+        padding: 1rem 0 0 0;
+        margin: 0;
+        display: flex;
+        gap: 43px;
 
-  @media (max-width: 640px) {
+        @media (max-width: 1024px) {
+            gap: 20px;
+            padding: 0.5rem 0 0 0;
+        }
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            gap: 16px;
+            padding: 0.25rem 0 0 0;
+        }
+    }
+
+    .main-content {
+        flex: 1;
+        padding: 0;
+        margin: -20px;
+    }
+
+    .card {
+        background: transparent;
+        border-radius: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    // TITRES
     .title {
-      font-size: 2rem;
+        font-family: 'Candlescript Demo Version', cursive;
+        font-size: 2.5rem;
+        font-weight: 400;
+        color: #2c2623;
+        text-align: center;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.02em;
+        padding: 0;
+        background: transparent;
+
+        @media (max-width: 1024px) {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 1.15rem;
+            margin-bottom: 0.25rem;
+        }
     }
 
     .subtitle {
-      font-size: 0.875rem;
+        font-size: 0.95rem;
+        color: #6b5d54;
+        text-align: center;
+        margin-bottom: 2.5rem;
+        font-weight: 300;
+        padding: 0;
+        background: transparent;
+
+        @media (max-width: 1024px) {
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 0.7rem;
+            margin-bottom: 0.75rem;
+        }
     }
-  }
+
+    .section {
+        margin-bottom: 48px;
+
+        @media (max-width: 1024px) {
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            margin-bottom: 16px;
+        }
+    }
+
+    .section-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+        font-weight: normal;
+
+        @media (max-width: 1024px) {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    }
+
+    // DISCIPLINES
+    .discipline-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+    }
+
+    .discipline-btn {
+        padding: 28px;
+        border-radius: 18px;
+        border: 1.5px solid $border-soft;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: left;
+
+        @media (max-width: 1024px) {
+            padding: 14px;
+            border-radius: 12px;
+        }
+
+        @media (max-width: 768px) {
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .discipline-name {
+            font-family: 'Times New Roman Italic', 'Times New Roman', Times, serif;
+            font-style: italic;
+            font-size: 2rem;
+            color: #4B3935;
+            margin-bottom: 8px;
+
+            @media (max-width: 1024px) {
+                font-size: 1.25rem;
+                margin-bottom: 4px;
+            }
+
+            @media (max-width: 768px) {
+                font-size: 1.1rem;
+                margin-bottom: 3px;
+            }
+        }
+
+        &:hover {
+            border-color: $brown-light;
+            transform: translateY(-2px);
+        }
+
+        &.active {
+            background-color: #4B3935;
+            color: white;
+            border-color: #4B3935;
+
+            .discipline-name {
+                color: white;
+            }
+
+            .discipline-subtitle {
+                color: #e8ddd6;
+            }
+        }
+    }
+
+    .discipline-subtitle {
+        color: $text-muted;
+        font-size: 14px;
+        margin-top: 4px;
+
+        @media (max-width: 1024px) {
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 11px;
+        }
+    }
+
+    // SÉANCES
+    .session-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        @media (max-width: 1024px) {
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            gap: 10px;
+        }
+    }
+
+    .session-item {
+        border-radius: 20px;
+        padding: 28px;
+        border: 1.5px solid $border-soft;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: transparent;
+
+        @media (max-width: 1024px) {
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        @media (max-width: 768px) {
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        &:hover {
+            border-color: $brown-light;
+            transform: translateY(-2px);
+        }
+
+        &.active {
+            background-color: #4B3935;
+            color: white;
+            border-color: #4B3935;
+
+            .session-name {
+                color: white;
+            }
+
+            .session-price {
+                color: white;
+                border-left-color: rgba(255, 255, 255, 0.3);
+            }
+
+            .session-desc,
+            .session-info {
+                color: #e8ddd6;
+            }
+        }
+    }
+
+    .session-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        margin-bottom: 16px;
+
+        @media (max-width: 1024px) {
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+    }
+
+    .session-name {
+        font-size: 1.3rem;
+        color: #4B3935;
+        font-weight: 600;
+        flex: 1;
+
+        @media (max-width: 1024px) {
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 0.95rem;
+        }
+    }
+
+    .session-price {
+        font-family: 'Times New Roman Italic', 'Times New Roman', Times, serif;
+        font-style: italic;
+        font-size: 1.8rem;
+        color: #4B3935;
+        white-space: nowrap;
+        padding-left: 24px;
+        border-left: 1px solid #4B3935;
+
+        @media (max-width: 1024px) {
+            font-size: 1.35rem;
+            padding-left: 12px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 1.15rem;
+            padding-left: 0;
+            border-left: none;
+        }
+    }
+
+    .session-desc {
+        margin-bottom: 8px;
+        color: $text-main;
+        font-size: 0.95rem;
+
+        @media (max-width: 1024px) {
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 0.75rem;
+            margin-bottom: 4px;
+        }
+    }
+
+    .session-info {
+        font-size: 0.9rem;
+        color: $text-muted;
+        margin-bottom: 4px;
+
+        @media (max-width: 1024px) {
+            font-size: 0.75rem;
+            margin-bottom: 3px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 0.7rem;
+        }
+    }
+
+    .session-warning {
+        margin-top: 12px;
+        padding: 10px;
+        background-color: rgba(255, 193, 7, 0.1);
+        border-left: 3px solid #ffc107;
+        font-size: 0.85rem;
+        color: #856404;
+
+        @media (max-width: 1024px) {
+            margin-top: 8px;
+            padding: 6px;
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            margin-top: 6px;
+            padding: 5px;
+            font-size: 0.7rem;
+        }
+
+        .session-item.active & {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: #fff3cd;
+            border-left-color: #fff3cd;
+        }
+
+        i {
+            margin-right: 6px;
+
+            @media (max-width: 768px) {
+                margin-right: 3px;
+            }
+        }
+    }
+
+    // OPTIONS
+    .options-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+
+        @media (max-width: 1024px) {
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+    }
+
+    .option-item {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        border-radius: 20px;
+        padding: 24px;
+        border: 1.5px solid $border-soft;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: transparent;
+
+        @media (max-width: 1024px) {
+            border-radius: 14px;
+            padding: 14px;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            border-radius: 12px;
+            padding: 12px;
+            gap: 8px;
+        }
+
+        &:hover {
+            border-color: $brown-light;
+        }
+
+        input {
+            margin-top: 6px;
+
+            @media (max-width: 768px) {
+                margin-top: 3px;
+            }
+
+            &:checked {
+                accent-color: #f1e6df;
+            }
+        }
+
+        &:has(input:checked) {
+            background-color: $brown-dark;
+            color: white;
+            border-color: $brown-dark;
+
+            .option-name,
+            .option-desc,
+            .option-price {
+                color: white;
+            }
+        }
+    }
+
+    .option-name {
+        font-size: 1rem;
+
+        @media (max-width: 1024px) {
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 0.8rem;
+        }
+    }
+
+    .option-desc {
+        font-size: 0.9rem;
+
+        @media (max-width: 1024px) {
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 0.7rem;
+        }
+    }
+
+    .option-price {
+        font-weight: bold;
+        margin-top: 8px;
+
+        @media (max-width: 1024px) {
+            margin-top: 5px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            margin-top: 4px;
+            font-size: 0.8rem;
+        }
+    }
+
+    // SIDEBAR
+    .sidebar {
+        width: 100%;
+        max-width: 280px;
+        flex-shrink: 0;
+
+        @media (max-width: 1024px) {
+            width: 300px;
+        }
+
+        @media (max-width: 768px) {
+            width: 100%;
+            order: 999;
+        }
+    }
+
+    .summary-card {
+
+        background-color: $brown;
+        color: white;
+        border-radius: 24px;
+        padding: 15px;
+        position: sticky;
+        top: 40px;
+
+        @media (max-width: 1024px) {
+            border-radius: 16px;
+            padding: 18px;
+            top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            position: static;
+            border-radius: 14px;
+            padding: 16px;
+        }
+    }
+
+    .summary-title {
+        font-size: 12px;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+
+        @media (max-width: 1024px) {
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+    }
+
+    .summary-details {
+        span {
+            color: #d6c8bf;
+        }
+
+        p {
+            margin-bottom: 12px;
+            font-size: 14px;
+
+            @media (max-width: 1024px) {
+                font-size: 12px;
+                margin-bottom: 8px;
+            }
+
+            @media (max-width: 768px) {
+                font-size: 11px;
+                margin-bottom: 6px;
+            }
+        }
+    }
+
+    .summary-options {
+        margin: 24px 0;
+
+        @media (max-width: 1024px) {
+            margin: 16px 0;
+        }
+
+        @media (max-width: 768px) {
+            margin: 12px 0;
+        }
+    }
+
+    .options-title {
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 8px;
+
+        @media (max-width: 1024px) {
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+    }
+
+    .total {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 32px 0;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+        @media (max-width: 1024px) {
+            font-size: 18px;
+            margin: 20px 0;
+            padding-top: 14px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 16px;
+            margin: 16px 0;
+            padding-top: 10px;
+        }
+    }
+
+    // BOUTON
+    .btn-next {
+        width: 100%;
+        background-color: #f1e6df;
+        color: $brown-dark;
+        border: none;
+        border-radius: 40px;
+        padding: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+
+        @media (max-width: 1024px) {
+            padding: 10px;
+            font-size: 12px;
+            border-radius: 28px;
+        }
+
+        @media (max-width: 768px) {
+            padding: 9px;
+            font-size: 11px;
+            border-radius: 24px;
+        }
+
+        &:hover:not(:disabled) {
+            background-color: #e8d9cf;
+            transform: translateY(-2px);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
 }
